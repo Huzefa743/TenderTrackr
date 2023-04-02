@@ -1,0 +1,21 @@
+#container {
+  opacity: 0.3;
+  background-color: #777788;
+  position: absolute;
+  top: 100px;
+  left: 100px;
+  height: 150px;
+  width: 300px;
+}
+#box {
+  opacity: 1;
+  background-color: #ffffff;
+  position: absolute;
+  top: 110px;
+  left: 110px;
+  height: 130px;
+  width: 270px;
+}
+.form-control{
+  text-align: left;
+}

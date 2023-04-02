@@ -1,0 +1,22 @@
+.accordion-button{
+    background-color: #ede7f6 !important;
+    border-color: #ede7f6 !important;
+    color: rgb(0, 0, 0) !important;
+}
+
+.accordion-body{
+    background-color: #ffff !important;
+}
+
+.accordion-button:not(.collapsed) {
+    color: rgb(0, 0, 0) !important;
+    border-color: #ede7f6 !important;
+}
+
+.add-btn{
+    margin-top: 12% !important;
+}
+
+.accordion-button:focus {
+    border-color: #e6ceff !important;
+}
