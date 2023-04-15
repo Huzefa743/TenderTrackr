@@ -5,6 +5,7 @@ const Customer = require('../models/customer')
 const Site = require('../models/site')
 const Work = require('../models/work')
 const Material = require('../models/material')
+const Payment = require('../models/payment')
 const { response } = require('express')
 const {v4: uuid4} = require('uuid')
 const fileName=require('./imageController')
@@ -53,7 +54,7 @@ const materialService = require('../service/materialService')
                 })   
                 }
             else{
-                let materialId = "MAT-" + uuid4()
+                var materialId = "MAT-" + uuid4()
                 if(req.file){
                     console.log("yes file exist")
                     var newImageName = Math.floor(Math.random()*9000000) + 10000000+".jpg";
@@ -71,12 +72,28 @@ const materialService = require('../service/materialService')
                     mop:req.body.mop,
                     receipt: '/'+customerId+'/'+materialId+'/'+newImageName,
                     cust_id: customerId,
+                    dealer_name:req.body.dealer_name,
                     site_id: siteId,
+                    date: req.body.date,
                     work_id:workId
                 })
 
                 material.save()
                 .then(async response => {
+                    let paymentId = "PY-" + uuid4()
+                    let payment =new Payment({
+                     payment_id: paymentId,
+                     amount:Number(req.body.price).toFixed(2),
+                     cust_id: customerId,
+                     site_id: siteId,
+                     date: req.body.date,
+                     action: "Debit",
+                     mop: req.body.mop,
+                     remark: "Material - "+req.body.name,
+                     material_id:materialId,
+                     dealer_name:req.body.dealer_name
+                    })
+                    payment.save()
                     
                     res.status(200).json({
                         status: "success",
@@ -234,11 +251,13 @@ const getAllMaterial = async (req, res, next) => {
         
         await Material.findByIdAndRemove(checkMaterialExist._id)
         .then(()=>{
+             Payment.findOneAndRemove({"material_id":checkMaterialExist.material_id}).then(
             res.status(200).json({
                 status: "success",
                 message: 'Material deleted successfully!',
                 workId: materialId
             })
+             )
         })
         .catch(error =>{
             res.status(400).json({

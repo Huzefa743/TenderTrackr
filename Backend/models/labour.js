@@ -24,6 +24,10 @@ var LabourSchema = new Schema({
         type: String,
         required: false
     },
+    dealer_name: {
+        type: String,
+        required: false
+    },
     site_id: {
         type: String,
         required: true

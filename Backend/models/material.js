@@ -24,6 +24,10 @@ var MaterialSchema = new Schema({
         type: String,
         required: false
     },
+    dealer_name: {
+        type: String,
+        required: false
+    },
     mop:{
         type: String,
         required: false
@@ -33,6 +37,10 @@ var MaterialSchema = new Schema({
         required: true
     },
     cust_id: {
+        type: String,
+        required: true,
+    },
+    date: {
         type: String,
         required: true,
     },

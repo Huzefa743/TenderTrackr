@@ -14,7 +14,7 @@ const {v4: uuid4} = require('uuid')
  const createCustomer = async (req, res, next)=> {
     console.log("create customer is running....")
 
-       if( req.body.name==null || req.body.address==null || req.body.email==null || req.body.mobile==null)
+       if( req.body.name==null)
                 {  
                 res.status(500).json({
                     status: "failed",
@@ -142,7 +142,7 @@ const getAllCustomer = async (req, res, next) => {
    
     const {page =1 , limit =5} =req.query;
     
-     let customerList =await Customer.find().limit(limit*1).skip((page -1) * limit);
+     let customerList =await Customer.find();
 
      for(let i=0; i<customerList.length; i++){
         let siteList = await Site.find({cust_id:customerList[i].cust_id})

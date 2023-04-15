@@ -6,6 +6,7 @@ const Site = require('../models/site')
 const Work = require('../models/work')
 const Material = require('../models/material')
 const Labour = require('../models/labour')
+const Payment = require('../models/payment')
 const { response } = require('express')
 const {v4: uuid4} = require('uuid')
 
@@ -44,7 +45,7 @@ const {v4: uuid4} = require('uuid')
             }) 
             }
             else{
-                if( req.body.purpose==null || req.body.qty==null || req.body.from_date==null || req.body.to_date==null)
+                if( req.body.purpose==null || req.body.from_date==null )
                 {  
                 res.status(500).json({
                     status: "failed",
@@ -53,13 +54,14 @@ const {v4: uuid4} = require('uuid')
                 }
             else{
             
-                let labourId = "LAB-" + uuid4()
+                var labourId = "LAB-" + uuid4()
                 let labour =new Labour({
                     labour_id: labourId,
                     purpose: req.body.purpose,
                     qty: req.body.qty,
                     from_date:req.body.from_date,
                     to_date:req.body.to_date,
+                    dealer_name:req.body.dealer_name,
                     price:req.body.price,
                     mop:req.body.mop,
                     cust_id: customerId,
@@ -69,6 +71,21 @@ const {v4: uuid4} = require('uuid')
 
                 labour.save()
                 .then(async response => {
+                    let paymentId = "PY-" + uuid4()
+                    let payment =new Payment({
+                     payment_id: paymentId,
+                     amount:Number(req.body.price).toFixed(2),
+                     cust_id: customerId,
+                     site_id: siteId,
+                     date: req.body.from_date,
+                     action: "Debit",
+                     mop: req.body.mop,
+                     remark: "Labour - "+req.body.purpose,
+                     labour_id:labourId,
+                     dealer_name:req.body.dealer_name
+                    })
+                    payment.save()
+
                     
                     res.status(200).json({
                         status: "success",
@@ -216,11 +233,13 @@ const getAllLabour = async (req, res, next) => {
         
         await Labour.findByIdAndRemove(checkLabourExist._id)
         .then(()=>{
+            Payment.findOneAndRemove({"labour_id":checkLabourExist.labour_id}).then(
             res.status(200).json({
                 status: "success",
                 message: 'Labour deleted successfully!',
                 labourId: labourId
             })
+            )
         })
         .catch(error =>{
             res.status(400).json({
