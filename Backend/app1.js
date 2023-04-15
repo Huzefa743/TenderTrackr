@@ -46,27 +46,42 @@ app.use(express.static(path.join(__dirname,'build')));
 
 
 //cloud db connection
-const uri=process.env.MONGO_URI;
-mongoose.connect(uri,{ useNewUrlParser: true }, { useUnifiedTopology: true }, {useCreateIndex : true})
-.then(() => console.log("DB connected"));
+// const uri=process.env.MONGO_URI;
+// mongoose.connect(uri,{ useNewUrlParser: true }, { useUnifiedTopology: true }, {useCreateIndex : true})
+// .then(() => console.log("DB connected"));
 
-mongoose.connection.on("error",err => {
-    console.log("DB connection error: ",err.message);
-})
+// mongoose.connection.on("error",err => {
+//     console.log("DB connection error: ",err.message);
+// })
 
-mongoose.connection.on("error",err => {
-    console.log("DB connection error: ",err.message);
+// mongoose.connection.on("error",err => {
+//     console.log("DB connection error: ",err.message);
+// })
+
+//local mongodb connection
+const uri ="mongodb://127.0.0.1:27017/Mimicker";
+mongoose.connect(uri, {
+  useNewUrlParser:true,      
+  useUnifiedTopology:true
+}, (err, client)=>{
+  if(err){
+    return console.log(err)
+  }
+  console.log('DB connected Successfully')
 })
 
 //app.use(bodyParser.urlencoded({​​​​​ extended: false }​​​​​));
 app.use(bodyParser.json());
 
 
-
-
-
 //middleware to access routes.
 app.use("/api/v1", routes);
+
+app.use("/kc/login", function(req,res) {
+  res.sendFile(path.join(__dirname, './build',  'index.html'));
+});
+
+
 
 const port= process.env.PORT || 8080;
 console.log("Server started on port : "+port)
