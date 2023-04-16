@@ -124,7 +124,7 @@ function Dashboard() {
                       </div>
                      
                       <div className='col-2' style={{textAlign:'right'}}>
-                      <IconButton aria-label="delete" style={{marginTop:-7}} onClick={()=>{window.location.href = `http://localhost:8080/api/v1/download-income-details`}}>
+                      <IconButton aria-label="delete" style={{marginTop:-7}} onClick={()=>{window.location.href = `http://kraftman-consultancy.netlify.app/api/v1/download-income-details`}}>
                       <SimCardDownloadIcon color='success'/>
                     </IconButton>
                     
@@ -188,7 +188,7 @@ function Dashboard() {
                       </div>
                      
                       <div className='col-2' style={{textAlign:'right'}}>
-                      <IconButton aria-label="delete" style={{marginTop:-7}} onClick={()=>{window.location.href = `http://localhost:8080/api/v1/download-expense-details`}}>
+                      <IconButton aria-label="delete" style={{marginTop:-7}} onClick={()=>{window.location.href = `http://kraftman-consultancy.netlify.app/api/v1/download-expense-details`}}>
                       <SimCardDownloadIcon color='success'/>
                     </IconButton>
                     
