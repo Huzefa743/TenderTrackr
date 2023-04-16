@@ -12,7 +12,7 @@ function PrivateRoutes() {
     return (
         <div>
             <AuthContext.Provider value={loggedInUser}>
-                {userName ? <Outlet /> : <Navigate to="/login" />};
+                {userName ? <Outlet /> : <Navigate to="/" />};
             </AuthContext.Provider>
         </div>
     )

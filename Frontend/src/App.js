@@ -32,12 +32,12 @@ function App() {
 
   return (
     <div>
-      <BrowserRouter basename='/kc'>
+      <BrowserRouter basename='/'>
         <SuccessExistcontext.Provider value={[successmsgexist, setSuccessmsgExist]}>
           <Successcontext.Provider value={[successmsg, setSuccessmsg]}>
             <UserIdContext.Provider value={[userid, setUserId]}>
               <Routes>
-                <Route path="/login" element={<Login />} />
+                <Route path="/" element={<Login />} />
                 <Route exact element={<PrivateRoutes />}>
                     {/* <Route path="/register" element={<Register />} /> */}
                     <Route path="/resetpwd" element={<ResetPassword />} />

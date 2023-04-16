@@ -21,7 +21,7 @@ function CreateMaterial() {
   function logOut(){
     console.log("log out is working...")
     window.localStorage.clear();
-    navigate('/login')
+    navigate('')
   }
 
   return (
