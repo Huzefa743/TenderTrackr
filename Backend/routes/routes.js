@@ -14,7 +14,10 @@ var paymentController = require('../controllers/paymentController')
 
 
 //frontend routing
-
+router.get('/', (req, res) => {
+      console.log("service called...")
+      res.send("GET Request Called")
+    })
 
 
 //authorization api route
