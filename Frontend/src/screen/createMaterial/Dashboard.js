@@ -203,7 +203,7 @@ function Dashboard() {
                 </div>
                 <div className='row' style={{marginLeft:0}}>
                    
-                    <div className='col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12'>
+                    <div className='col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12' style={{marginTop:10}}>
                         <TextField size='small' select name='mop'  disabled={disableCreateMaterialField} onChange={event => handleCreateCustoemrFormChange(event)} value={createMaterialFormFields.mop}  placeholder='Done'  label="Mode Of Payment" defaultValue="Cash" fullWidth variant="standard"  >
                                     <MenuItem value={"Cash"}>Cash</MenuItem>
                                     <MenuItem  value={"Phone Pay"}>Phone Pay </MenuItem>

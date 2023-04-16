@@ -113,15 +113,15 @@ function Dashboard() {
                 
             
                 <div className='row' style={{marginLeft:0}}>
-                <div className='col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12' style={{marginRight:0}}>
-                                    <TextField id="standard-select-currency" name='ttglEnqRefNo'  disabled={disableCreateWorkField} onChange={(event) => ( fetchCustomerSiteListDetails(event.target.value), setCustomerId(event.target.value))} value={customerId} select label="Customer" defaultValue="" variant="standard" style={{fontSize:12, width:'98%'}}>      
+                <div className='col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12' style={{marginRight:0, marginTop:10}}>
+                                    <TextField id="standard-select-currency" name='ttglEnqRefNo'  disabled={disableCreateWorkField} onChange={(event) => ( fetchCustomerSiteListDetails(event.target.value), setCustomerId(event.target.value))} value={customerId} select label="Customer" defaultValue="" variant="standard" fullWidth>      
                                                 {customerList.map((customerDetails)=>(
                                                     <MenuItem value={customerDetails.cust_id} >{customerDetails.name}</MenuItem>   
                                                 ))}
                                     </TextField>
                                 </div>
-                    <div className='col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12' style={{marginRight:0}}>
-                        <TextField id="standard-select-currency" name='siteId'  disabled={disableCreateWorkField || siteFieldDisable} onChange={(event) => setSiteId(event.target.value)} value={siteId} select label="Site" defaultValue="" variant="standard" style={{fontSize:12, width:'98%'}}>      
+                    <div className='col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12' style={{marginRight:0, marginTop:10}}>
+                        <TextField id="standard-select-currency" name='siteId'  disabled={disableCreateWorkField || siteFieldDisable} onChange={(event) => setSiteId(event.target.value)} value={siteId} select label="Site" defaultValue="" variant="standard" fullWidth >      
                                     {siteList.map((siteDetails)=>(
                                         <MenuItem value={siteDetails.site_id} >{siteDetails.name}</MenuItem>   
                                     ))}
@@ -131,7 +131,7 @@ function Dashboard() {
                 </div>
                 <div className='row' style={{marginLeft:0}}>
                     <div className='col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12'>
-                        <TextField  margin="dense"  name='description'  disabled={disableCreateWorkField} onChange={event => handleCreateCustoemrFormChange(event)} value={createWorkFormFields.description} label="Description" multiline rows={3} placeholder='3 main window - 20*30cm in 5 mm, 2 side window - 40*50 in 9mm' type="text" fullWidth variant="standard"/>
+                        <TextField  margin="dense"  name='description'  disabled={disableCreateWorkField} onChange={event => handleCreateCustoemrFormChange(event)} value={createWorkFormFields.description} label="Description" multiline placeholder='3 main window - 20*30cm in 5 mm' type="text" fullWidth variant="standard"/>
                     </div>
                     <div className='col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12'>
                         <TextField  margin="dense"  name='work_type'  disabled={disableCreateWorkField} onChange={event => handleCreateCustoemrFormChange(event)} value={createWorkFormFields.work_type} label="Work Type" placeholder='Glass' type="text" fullWidth variant="standard"/>
@@ -141,7 +141,7 @@ function Dashboard() {
                     <div className='col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12'>
                         <TextField  margin="dense"  name='estimate_days'  disabled={disableCreateWorkField} onChange={event => handleCreateCustoemrFormChange(event)} value={createWorkFormFields.estimate_days} label="Estimate Days" placeholder='5' type="number" fullWidth variant="standard"/>
                     </div>
-                    <div className='col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12'>
+                    <div className='col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12' style={{marginTop:10}}>
                         <TextField size='small' select name='status'  disabled={disableCreateWorkField} onChange={event => handleCreateCustoemrFormChange(event)} value={createWorkFormFields.status}  placeholder='Done'  label="Status" defaultValue="Not yet Start" fullWidth variant="standard"  >
                         <MenuItem value={"Not-Yet-Start"}>Not Yet Start</MenuItem>
                                 <MenuItem  value={"Hold"}>Hold </MenuItem>

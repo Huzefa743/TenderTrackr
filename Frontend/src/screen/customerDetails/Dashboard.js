@@ -135,6 +135,13 @@ function Dashboard() {
         });
     }
 
+    async function deleteCustomer(customerId){
+      API.deleteCustomer(customerId).then((res) => {
+          fetchPaymentDetails()
+          navigate('/home')
+      });
+  }
+
   //-------------work update----------------------------------------------------
 
     async function fetchWorkDetailsByWorkId(workId){
@@ -335,7 +342,7 @@ async function fetchMaterialDetailsByMaterialId(materialId){
                             </div>
                             <div className="row" style={{display:'flex', justifyContent:'flex-end', marginRight:0}}>
         <IconButton aria-label="delete"  color="primary" style={{ width:40, textAlign:'right', }}><EditIcon color='action'/></IconButton>
-        {/* <IconButton  aria-label="delete"  color="primary"  style={{  width:40, textAlign:'right', }}><DeleteIcon color='error'/></IconButton>                      */}
+        <IconButton  aria-label="delete"  color="primary"  style={{  width:40, textAlign:'right', }} onClick={()=>deleteCustomer(customerDetails.cust_id)}><DeleteIcon color='error'/></IconButton>                     
      </div>
                           
                             </Typography>
@@ -405,7 +412,7 @@ async function fetchMaterialDetailsByMaterialId(materialId){
 
 {/* site details--------------------- */}
 
-<Accordion style={{marginBottom:10, paddingLeft:0, paddingRight:0, marginTop:10}}>
+<Accordion style={{marginBottom:50, paddingLeft:0, paddingRight:0, marginTop:10}}>
                             <AccordionSummary style={{backgroundColor:'lightgray',}}
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel1a-content"

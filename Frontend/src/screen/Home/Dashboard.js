@@ -171,7 +171,7 @@ function Dashboard() {
             {customerList.map(customerDetails=>(
                 <>
                 
-       <ListItem style={{width:'100%'}} onClick={()=>{navigate('/customer-details/'+customerDetails.cust_id)}}>
+       <ListItem style={{width:'100%', cursor:'pointer'}} onClick={()=>{navigate('/customer-details/'+customerDetails.cust_id)}}>
         <ListItemAvatar>
        
         <Avatar  {...stringAvatar(customerDetails.name)} src="/static/images/avatar/1.jpg" />

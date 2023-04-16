@@ -206,6 +206,18 @@ export const deletePayment = async (paymentId) =>{
   });
 }
 
+//delete customer
+export const deleteCustomer = async (customerId) =>{
+  return await axios({
+    method: "DELETE",
+    url: baseURL + `customer/${customerId}`,
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Basic ${localStorage.getItem("accesstoken")}`,
+    },
+  });
+}
+
 //delete labour
 export const deleteLabour = async (labourId) =>{
   return await axios({

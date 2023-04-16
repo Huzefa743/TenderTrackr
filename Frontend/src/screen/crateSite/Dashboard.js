@@ -84,14 +84,14 @@ function Dashboard() {
                 
             
                 <div className='row' style={{marginLeft:0}}>
-                <div className='col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12' style={{marginRight:0}}>
-                                    <TextField id="standard-select-currency" name='ttglEnqRefNo'  disabled={disableCreateSiteField} onChange={(event) => setCustomerId(event.target.value)} value={customerId} select label="Customer" defaultValue="" variant="standard" style={{fontSize:12, width:'98%'}}>      
+                <div className='col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12' style={{marginRight:0, marginTop:10}}>
+                                    <TextField id="standard-select-currency" name='ttglEnqRefNo'  disabled={disableCreateSiteField} onChange={(event) => setCustomerId(event.target.value)} value={customerId} select label="Customer" defaultValue="" variant="standard" fullWidth>      
                                                 {customerList.map((customerDetails)=>(
                                                     <MenuItem value={customerDetails.cust_id} >{customerDetails.name}</MenuItem>   
                                                 ))}
                                     </TextField>
                                 </div>
-                    <div className='col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12'>
+                    <div className='col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12' style={{marginTop:0}}>
                         <TextField  margin="dense"  name='name'  disabled={disableCreateSiteField} onChange={event => handleCreateCustoemrFormChange(event)} value={createSiteFormFields.name} label="Site Name" placeholder='Shymla Hills' type="text" fullWidth variant="standard"/>
                     </div>
                 </div>

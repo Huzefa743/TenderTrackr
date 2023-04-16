@@ -3,7 +3,7 @@ import "./Login.css";
 import { Formik } from "formik";
 import {Image, Form, Button, NavLink} from 'react-bootstrap'
 import bgImage from "../../logos/bg-image.jpg"
-import logo from "../../logos/main-logo.png"
+import logo from "../../logos/logo-main.png"
 import { color } from "@mui/system";
 import { Link, useNavigate } from "react-router-dom";
 import TextField from '@mui/material/TextField';
@@ -15,8 +15,12 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import IconButton from '@mui/material/IconButton';
 import * as API from "../../services/services";
-import { FormHelperText } from "@mui/material";
+import { Divider, FormHelperText } from "@mui/material";
 import Loader from "../../components/Loader/laoder";
+import FacebookIcon from '@mui/icons-material/Facebook';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import TwitterIcon from '@mui/icons-material/Twitter';
 
 
 const Login = () => {
@@ -68,7 +72,7 @@ const Login = () => {
   return (
   <>
   
-    <div style={{backgroundImage:`url(${bgImage})`,  backgroundRepeat:'no-repeat', backgroundAttachment:'fixed', backgroundSize:'cover'}}>
+    <div className="d-none d-sm-block" style={{backgroundImage:`url(${bgImage})`,  backgroundRepeat:'no-repeat', backgroundAttachment:'fixed', backgroundSize:'cover'}}>
     
     
       
@@ -77,8 +81,8 @@ const Login = () => {
    
         <div className="col-xl-6 col-lg-6 col-sm-12 col-xs-12" style={{ background:'rgb(0, 89, 191,0.75)', height:'900px'  }}>
             <div style={{margin:'10%', background:'white', borderRadius:5, padding:'10%', paddingTop:'5%', textAlign:'center', marginTop:'8%'}}>
-                <p style={{fontSize:18, fontWeight:700, color:'#AEADAD', opacity:1}}>WELCOME TO</p>
-                <img src={logo} style={{height:'80%', width:'80%'}}></img>
+                <p style={{fontSize:12, fontWeight:700, color:'#AEADAD', opacity:1, marginBottom:0}}>WELCOME TO</p>
+                <img src={logo} style={{height:'70%', width:'80%'}}></img>
          
                   <Form style={{textAlign:'left', marginTop:'10%'}}>
                   <TextField error={errorOccur} helperText={errorMessage} id="standard-basic" onChange={(e) => {setEmail(e.target.value)}} required label="Email or Username" variant="standard" style={{width:'100%', marginBottom:20}}/>
@@ -115,6 +119,69 @@ const Login = () => {
         </div>
       </div>
     </div>
+    <div className="d-block d-sm-none" style={{backgroundImage:`url(${bgImage})`,  backgroundRepeat:'no-repeat', backgroundAttachment:'fixed', backgroundSize:'cover'}}>
+   <div className="row"  style={{padding:0, margin:0, height:'auto', width:'100%', backgroundColor:''}}>
+   
+        <div className="col-xl-6 col-lg-6 col-sm-12 col-xs-12" style={{ background:'rgb(0, 89, 191,0.75)', height:'auto'  }}>
+            <div style={{ background:'white', borderRadius:5, padding:'10%', paddingTop:'5%', textAlign:'center', marginTop:'3%'}}>
+                <p style={{fontSize:12, fontWeight:700, color:'#AEADAD', opacity:1, marginBottom:0}}>WELCOME TO</p>
+                <img src={logo} style={{height:'70%', width:'80%'}}></img>
+         
+                  <Form style={{textAlign:'left', marginTop:'20%'}}>
+                  <TextField error={errorOccur} helperText={errorMessage} id="standard-basic" onChange={(e) => {setEmail(e.target.value)}} required label="Email or Username" variant="standard" style={{width:'100%', marginBottom:20}}/>
+                
+                  <FormControl sx={{ width: '100%', marginBottom:1 }} variant="standard" required>
+                        <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
+                            <Input error={errorOccur} helperText={errorMessage} onChange={(e) => {setPassword(e.target.value)}} id="standard-adornment-password" type={showPassword ? 'text' : 'password'}
+                              endAdornment={ <InputAdornment position="end"> <IconButton aria-label="toggle password visibility"
+                                    onClick={handleClickShowPassword}
+                                    onMouseDown={handleMouseDownPassword}>
+                                    {showPassword ? <VisibilityOff /> : <Visibility />} </IconButton>
+                            </InputAdornment>}/>
+                            <FormHelperText id="standard-weight-helper-text" style={{color:'#d32f2f'}}>{errorMessage}</FormHelperText>
+                   </FormControl>
+                        {/* <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                          <Form.Label style={{fontWeight:600, color:"#5F5E5E"}}>Username</Form.Label>
+                          <Form.Control type="email" placeholder="name@example.com" />
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                          <Form.Label style={{fontWeight:600, color:"#5F5E5E"}}>Password</Form.Label>
+                          <Form.Control type="password" placeholder="Password" />
+                        </Form.Group> */}
+                        <NavLink><p style={{fontWeight:700, fontSize:12, textAlign:'right', color:'#0059BF', marginBottom:40}}>Forgotten Password ?</p></NavLink>
+                        <Button onClick={loginUser} style={{width:'100%', backgroundColor:'#0059BF', fontWeight:700}}>{spinnerVisible ? <Loader/>:<>Login</>}</Button>
+                        {/* <ButtonPr width="100%" height={ 40} label="Login" fontSize={14} fontWeight={700} /></Link> */}
+                  </Form>
+                  <Divider/>
+                   <div style={{ marginTop:20, display: 'flex', justifyContent: 'center' }}>
+                   
+                      <div style={{ margin: '0 10px' }}>
+                             <IconButton aria-label="delete" >
+                                  <FacebookIcon color="info" />
+                              </IconButton>
+                              <IconButton aria-label="delete">
+                                  <TwitterIcon color="info" />
+                              </IconButton>
+                              <IconButton aria-label="delete">
+                                  <LinkedInIcon color="info" />
+                              </IconButton>
+                              <IconButton aria-label="delete">
+                                  <InstagramIcon color="info" />
+                              </IconButton>
+                      </div>
+                    
+                  </div>
+                  
+            </div>
+        </div>
+        <div className="col-xl-6 col-lg-6 col-sm-12 col-xs-12" style={{ background:'rgb(0, 89, 191,0.75)', }}>
+            <div style={{color:'white', textAlign:'center', justifyContent:'center',backgroundColor:'', marginTop:'0%', padding:'5%', height:'400px', paddingTop:'20%'}}>
+              <p style={{fontWeight:700, fontSize:20, marginBottom:'5%'}}>Kraftman Consultants</p>
+              <p>Welcome to our consultancy firm, where we specialize in providing comprehensive solutions for all your house designing and building needs. With our expertise in 3D house design and construction management, we take complete ownership of your project from start to finish, ensuring a seamless and hassle-free experience for you.</p>
+            </div>
+        </div>
+      </div>
+      </div>
   </>
   );
 };
