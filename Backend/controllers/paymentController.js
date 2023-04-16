@@ -379,8 +379,17 @@ const getAllCreditPayment = async (req, res, next) => {
       }
       else{
         for(let i=0; i<paymentList.length; i++){
-            let customerDetails = await Customer.findOne({cust_id:paymentList[i].cust_id})
-            paymentList[i].customer_name=customerDetails.name
+            console.log("here si the payment details", paymentList[i])
+            
+            let customerDetails = await Customer.findOne({"cust_id":paymentList[i].cust_id})
+            console.log("here si the details", customerDetails)
+            if(customerDetails==null){
+                paymentList[i].customer_name="Null"
+            }
+            else{
+                paymentList[i].customer_name=customerDetails.name
+            }
+           
         }    
 
         for(let i=0; i<paymentList.length; i++){
