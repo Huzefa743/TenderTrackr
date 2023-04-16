@@ -555,7 +555,7 @@ async function fetchMaterialDetailsByMaterialId(materialId){
                                         Mode of Payment : <span style={{color:'black'}}>{materialDetails.mop}</span>
                                     </Typography>
                                    
-                                    <img style={{marginTop:20, width:'100%', height:'auto'}} onClick={()=>{setreceiptPreview(true)}} src={"http://kraftman-consultancy.netlify.app/api/v1/material-receipt/"+materialDetails.material_id}></img>
+                                    <img style={{marginTop:20, width:'100%', height:'auto'}} onClick={()=>{setreceiptPreview(true)}} src={"https://kraftman-consultant.onrender.com//api/v1/material-receipt/"+materialDetails.material_id}></img>
                                      {/* image dilog box */}
 
                                      <Dialog
@@ -571,7 +571,7 @@ async function fetchMaterialDetailsByMaterialId(materialId){
                                         /> */}
                                         <img
                                         style={{ maxWidth: "100%", maxHeight: "calc(100vh - 64px)" }}
-                                        src={"http://kraftman-consultancy.netlify.app/api/v1/material-receipt/"+materialDetails.material_id}
+                                        src={"https://kraftman-consultant.onrender.com//api/v1/material-receipt/"+materialDetails.material_id}
                                         alt="image"
                                         />
                                     </Dialog>
