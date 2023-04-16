@@ -2,8 +2,8 @@ import React, { useContext, useState, useEffect } from "react";
 import "./Login.css";
 import { Formik } from "formik";
 import {Image, Form, Button, NavLink} from 'react-bootstrap'
-import bgImage from "../../logos/bg.jpg"
-import logo from "../../logos/logos.png"
+import bgImage from "../../logos/bg-image.jpg"
+import logo from "../../logos/main-logo.png"
 import { color } from "@mui/system";
 import { Link, useNavigate } from "react-router-dom";
 import TextField from '@mui/material/TextField';
@@ -75,7 +75,7 @@ const Login = () => {
       {/* <div style={{width:'100%', height:'100%'}}>hellow world</div> */}
       <div className="row" style={{padding:0, margin:0, height:'auto', width:'100%', backgroundColor:''}}>
    
-        <div className="col-xl-6 col-lg-6 col-sm-12 col-xs-12" style={{ background:'rgb(0, 89, 191,0.75)', height:'100%'  }}>
+        <div className="col-xl-6 col-lg-6 col-sm-12 col-xs-12" style={{ background:'rgb(0, 89, 191,0.75)', height:'900px'  }}>
             <div style={{margin:'10%', background:'white', borderRadius:5, padding:'10%', paddingTop:'5%', textAlign:'center', marginTop:'8%'}}>
                 <p style={{fontSize:18, fontWeight:700, color:'#AEADAD', opacity:1}}>WELCOME TO</p>
                 <img src={logo} style={{height:'80%', width:'80%'}}></img>
@@ -109,8 +109,8 @@ const Login = () => {
         </div>
         <div className="col-xl-6 col-lg-6 col-sm-12 col-xs-12" style={{ background:'rgb(0, 89, 191,0.75)', }}>
             <div style={{color:'white', textAlign:'center', justifyContent:'center',backgroundColor:'', marginTop:'30%', padding:'5%'}}>
-              <p style={{fontWeight:700, fontSize:20, marginBottom:'5%'}}>TESLA TRANSFORMERS (GLOBAL) PRIVATE LIMITED</p>
-              <p>Tesla Transformers Global Pvt Ltd is a multi-poduct and service organization engaged in manufacturing, suplying, erecting, testing and commissioning of Power and Distribution Transformers in India.</p>
+              <p style={{fontWeight:700, fontSize:20, marginBottom:'5%'}}>Kraftman Consultants</p>
+              <p>Welcome to our consultancy firm, where we specialize in providing comprehensive solutions for all your house designing and building needs. With our expertise in 3D house design and construction management, we take complete ownership of your project from start to finish, ensuring a seamless and hassle-free experience for you.</p>
             </div>
         </div>
       </div>
