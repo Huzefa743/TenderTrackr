@@ -43,7 +43,7 @@ async function moveImage(ActualImageName, NewImageName) {
         text: 'hello'
         // text: `Hi,
         //          \n Please find the temp password for your Tesla-Clickup.
-        //          \n link : https://kraftman-consultants.onrender.com/login
+        //          \n link : https://kraftman-consultant.onrender.com/login
         //          \n
         //          \n
         //          \n\nRegards,

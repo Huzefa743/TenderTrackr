@@ -562,7 +562,7 @@ async function fetchMaterialDetailsByMaterialId(materialId){
                                         Mode of Payment : <span style={{color:'black'}}>{materialDetails.mop}</span>
                                     </Typography>
                                    
-                                    <img style={{marginTop:20, width:'100%', height:'auto'}} onClick={()=>{setreceiptPreview(true)}} src={"https://kraftman-consultants.onrender.com/api/v1/material-receipt/"+materialDetails.material_id}></img>
+                                    <img style={{marginTop:20, width:'100%', height:'auto'}} onClick={()=>{setreceiptPreview(true)}} src={"https://kraftman-consultant.onrender.com/api/v1/material-receipt/"+materialDetails.material_id}></img>
                                      {/* image dilog box */}
 
                                      <Dialog
