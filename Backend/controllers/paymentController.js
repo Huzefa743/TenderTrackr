@@ -244,6 +244,7 @@ const getAllDebitPayment = async (req, res, next) => {
 
         for(let i=0; i<paymentList.length; i++){
             let customerDetails = await Customer.findOne({cust_id:paymentList[i].cust_id})
+            console.log("here is the payment details", paymentList[i])
             paymentList[i].customer_name=customerDetails.name
             let siteDetails = await Site.findOne({site_id:paymentList[i].site_id})
             paymentList[i].site_name=siteDetails.name
@@ -383,12 +384,9 @@ const getAllCreditPayment = async (req, res, next) => {
             
             let customerDetails = await Customer.findOne({"cust_id":paymentList[i].cust_id})
             console.log("here si the details", customerDetails)
-            if(customerDetails==null){
-                paymentList[i].customer_name="Null"
-            }
-            else{
+            
                 paymentList[i].customer_name=customerDetails.name
-            }
+            
            
         }    
 
@@ -404,7 +402,7 @@ const getAllCreditPayment = async (req, res, next) => {
          
         
         
-        let output =await generateExcelFile(await getAttributesByKeys(paymentList, ['date', 'customer_name', 'mop', 'remark', 'amount']))
+      //  let output =await generateExcelFile(await getAttributesByKeys(paymentList, ['date', 'customer_name', 'mop', 'remark', 'amount']))
         
     
 
@@ -431,7 +429,7 @@ const getAllCreditPayment = async (req, res, next) => {
 
 //download credit payment excel payments-----------------
 const downloadCreditPaymentExcel = async (req, res, next) => {
-    console.log("get overall credit payment ........")
+    console.log("Download all credit payment ........")
     
     try{
     
@@ -448,6 +446,7 @@ const downloadCreditPaymentExcel = async (req, res, next) => {
             let customerDetails = await Customer.findOne({cust_id:paymentList[i].cust_id})
             paymentList[i].customer_name=customerDetails.name
         }    
+        console.log("here is the payment list", paymentList)
 
         await generateExcelFile(await getAttributesByKeys(paymentList, ['date', 'customer_name', 'mop', 'remark', 'amount']))
         

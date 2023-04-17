@@ -36,7 +36,7 @@ const Header = (props) => {
         <Navbar key="sm" bg="light" expand="sm" className="mb-3" style={{boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)', height:60, margin:0}}>
           <Container fluid style={{height:60,}}>
             <Navbar.Brand >
-              <img onClick={()=>navigate('/home')} src={logo} style={{height:50, width:'270px', marginLeft:0}}></img>
+              <img onClick={()=>navigate('/home')} src={logo} style={{height:40, width:'200px', marginLeft:0}}></img>
               
               </Navbar.Brand>
             

@@ -342,7 +342,7 @@ async function fetchMaterialDetailsByMaterialId(materialId){
                             </div>
                             <div className="row" style={{display:'flex', justifyContent:'flex-end', marginRight:0}}>
         <IconButton aria-label="delete"  color="primary" style={{ width:40, textAlign:'right', }}><EditIcon color='action'/></IconButton>
-        <IconButton  aria-label="delete"  color="primary"  style={{  width:40, textAlign:'right', }} onClick={()=>deleteCustomer(customerDetails.cust_id)}><DeleteIcon color='error'/></IconButton>                     
+        {/* <IconButton  aria-label="delete"  color="primary"  style={{  width:40, textAlign:'right', }} onClick={()=>deleteCustomer(customerDetails.cust_id)}><DeleteIcon color='error'/></IconButton>                      */}
      </div>
                           
                             </Typography>
@@ -562,7 +562,7 @@ async function fetchMaterialDetailsByMaterialId(materialId){
                                         Mode of Payment : <span style={{color:'black'}}>{materialDetails.mop}</span>
                                     </Typography>
                                    
-                                    <img style={{marginTop:20, width:'100%', height:'auto'}} onClick={()=>{setreceiptPreview(true)}} src={"https://kraftman-consultant.onrender.com/api/v1/material-receipt/"+materialDetails.material_id}></img>
+                                    <img style={{marginTop:20, width:'100%', height:'auto'}} onClick={()=>{setreceiptPreview(true)}} src={"https://kraftman-consultants.onrender.com/api/v1/material-receipt/"+materialDetails.material_id}></img>
                                      {/* image dilog box */}
 
                                      <Dialog
