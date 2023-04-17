@@ -59,7 +59,7 @@ router.put('/update-material/:materialId',verifyUser,imageController.uploadImage
 router.get('/material/:materialId',verifyUser,  materialController.getMaterialById)
 router.get('/material-list/:workId',verifyUser,  materialController.getAllMaterial)
 router.delete('/material/:materialId',verifyUser,  materialController.deleteMaterial)
-router.get('/material-receipt/:materialId',verifyUser,  materialController.showMaterialImage)
+router.get('/material-receipt/:materialId',  materialController.showMaterialImage)
 
 //labour routes
 router.post('/create-labour/:custId/:siteId/:workId',verifyUser,  labourController.createLabour)
