@@ -68,14 +68,6 @@ app.use(bodyParser.json());
 //middleware to access routes.
 app.use("/api/v1", routes);
 
-app.use("/kc/login", function(req,res) {
-  res.sendFile(path.join(__dirname, './build',  'index.html'));
-});
-
-// app.get("/", (req, res) => {
-//   console.log("service called...")
-//   res.send("GET Request Called")
-// })
 
 const port= process.env.PORT || 8080;
 console.log("Server started on port : "+port)

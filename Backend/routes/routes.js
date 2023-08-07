@@ -14,10 +14,11 @@ var paymentController = require('../controllers/paymentController')
 
 
 //frontend routing
-router.get('/', (req, res) => {
-      console.log("service called...")
-      res.send("GET Request Called")
-    })
+
+router.get('/', function(req,res) {
+  console.log(" here is frontend execution")
+  res.sendFile(path.join(__dirname, '../build',  'index.html'));
+});
 
 
 //authorization api route
