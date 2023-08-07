@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "0f2020a33c381fcfe311",
+    "revision": "1c91c2dc2eb384ee6156",
     "url": "/static/css/main.742d34c6.chunk.css"
   },
   {
-    "revision": "0f2020a33c381fcfe311",
-    "url": "/static/js/main.73e748ad.chunk.js"
+    "revision": "1c91c2dc2eb384ee6156",
+    "url": "/static/js/main.21887a76.chunk.js"
   },
   {
     "revision": "8145a327982e79c6016b",
@@ -44,15 +44,15 @@ self.__precacheManifest = [
     "url": "/static/media/Resetpwd.3872b434.svg"
   },
   {
-    "revision": "52196284de1fcb5b044f001a75482dba",
-    "url": "/static/media/bootstrap-icons.52196284.woff"
-  },
-  {
     "revision": "7f477633ddd12f84284654f2a2e89b8a",
     "url": "/static/media/bootstrap-icons.7f477633.woff2"
   },
   {
-    "revision": "818e39981780d4545768a7f5fc2baf84",
+    "revision": "52196284de1fcb5b044f001a75482dba",
+    "url": "/static/media/bootstrap-icons.52196284.woff"
+  },
+  {
+    "revision": "84cebf03ea3b54ce17f5ea8dbf20df48",
     "url": "/index.html"
   }
 ];

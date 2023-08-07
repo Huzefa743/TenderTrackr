@@ -125,7 +125,7 @@ function Dashboard() {
                      
                       <div className='col-2' style={{textAlign:'right'}}>
                         {console.log("here is the payment list", creditPaymentList.length)}
-                      <IconButton disabled={creditPaymentList.length==0} aria-label="delete" style={{marginTop:-7}} onClick={()=>{window.location.href = `https://kraftman-consultant.onrender.com/api/v1/download-income-details`}}>
+                      <IconButton disabled={creditPaymentList.length==0} aria-label="delete" style={{marginTop:-7}} onClick={()=>{window.location.href = `https://craftshome.up.railway.app/api/v1/download-income-details`}}>
                       <SimCardDownloadIcon color={creditPaymentList.length==0 ? 'disabled':'success'}/>
                     </IconButton>
                     
@@ -189,7 +189,7 @@ function Dashboard() {
                       </div>
                      
                       <div className='col-2' style={{textAlign:'right'}}>
-                      <IconButton disabled={debitPaymentList.length==0} aria-label="delete" style={{marginTop:-7}} onClick={()=>{window.location.href = `https://kraftman-consultant.onrender.com/api/v1/download-expense-details`}}>
+                      <IconButton disabled={debitPaymentList.length==0} aria-label="delete" style={{marginTop:-7}} onClick={()=>{window.location.href = `https://craftshome.up.railway.app/api/v1/download-expense-details`}}>
                       <SimCardDownloadIcon color={debitPaymentList.length==0 ? 'disabled':'success'}/>
                     </IconButton>
                     
