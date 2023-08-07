@@ -70,5 +70,5 @@ app.use("/api/v1", routes);
 
 
 const port= process.env.PORT || 8080;
-console.log("Server started on port : "+port)
+console.log("Server started on this port: "+port)
 app.listen(port);
