@@ -1,4 +1,4 @@
-import { Accordion, AccordionDetails, AccordionSummary, AppBar, Button, Dialog, IconButton, List, ListItem, ListItemAvatar, ListItemText, MenuItem, Slide, TextField, Toolbar, Typography } from '@mui/material';
+import { Accordion, AccordionDetails, AccordionSummary, AppBar, Button, Dialog, DialogActions, IconButton, List, ListItem, ListItemAvatar, ListItemText, MenuItem, Slide, TextField, Toolbar, Typography } from '@mui/material';
 import React , {useState, useEffect}from 'react'
 import { Container, Card, ListGroup } from 'react-bootstrap'
 import { useNavigate, useParams } from 'react-router-dom';
@@ -13,7 +13,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Loader from '../../components/Loader/laoder';
 import { DesktopDatePicker, LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+//import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import moment from 'moment';
 
 
@@ -143,21 +143,57 @@ function Dashboard() {
   return (
     <>
      {loaderVisible? <Loader/>:<></>}
-    <div className='row' style={{height:'auto', backgroundColor:'', borderRadius:5, border:'1px solid lightgray', padding:0, margin:0, padding:10, marginBottom:20, marginTop:10, paddingBottom:0}}>
+    <div className='row' style={{height:'auto', backgroundColor:'', borderRadius:5, border:'1px solid lightgray', padding:0, margin:0, padding:10, marginBottom:20, marginTop:0, paddingBottom:0}}>
             
             <p style={{fontWeight:700, color:'#5F5E5E', fontSize:15, marginTop:0, marginBottom:0}}>Create Labour :</p>
                 
             
                 <div className='row' style={{marginLeft:0}}>
                 <div className='col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12' style={{marginRight:0, marginTop:10}}>
-                                    <TextField id="standard-select-currency" name='ttglEnqRefNo'  disabled={disableCreateLabourField} onChange={(event) => ( fetchCustomerSiteListDetails(event.target.value), setCustomerId(event.target.value))} value={customerId} select label="Customer" defaultValue="" variant="standard" fullWidth>      
+                                    <TextField id="standard-select-currency" name='ttglEnqRefNo'  disabled={disableCreateLabourField} onChange={(event) => ( fetchCustomerSiteListDetails(event.target.value), setCustomerId(event.target.value))} value={customerId} select label="Customer" defaultValue="" variant="standard" fullWidth
+                                    InputLabelProps={{
+                                        style: {
+                                          color: "#21ad01", // Change this to your desired label color
+                                          borderColor: "#21ad01",
+                                        },
+                                      }}
+                                      InputProps={{
+                                        style: {
+                                          color: "black", // Change text color
+                                          borderColor: "#f798a1",
+                                        },
+                                        focused: {
+                                          borderColor: "#55766f", // Change focus border color
+                                          color: "#55766f", // Change text color
+                                          
+                                        },
+                                      }}
+                                    >      
                                                 {customerList.map((customerDetails)=>(
                                                     <MenuItem value={customerDetails.cust_id} >{customerDetails.name}</MenuItem>   
                                                 ))}
                                     </TextField>
                                 </div>
                     <div className='col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12' style={{marginRight:0, marginTop:10}}>
-                        <TextField id="standard-select-currency" name='siteId'  disabled={disableCreateLabourField || siteFieldDisable} onChange={(event) => (fetchCustomerSiteWorkListDetails(event.target.value), setSiteId(event.target.value))} value={siteId} select label="Site" defaultValue="" fullWidth variant="standard" >      
+                        <TextField id="standard-select-currency" name='siteId'  disabled={disableCreateLabourField || siteFieldDisable} onChange={(event) => (fetchCustomerSiteWorkListDetails(event.target.value), setSiteId(event.target.value))} value={siteId} select label="Site" defaultValue="" fullWidth variant="standard"
+                        InputLabelProps={{
+                            style: {
+                              color: "#21ad01", // Change this to your desired label color
+                              borderColor: "#21ad01",
+                            },
+                          }}
+                          InputProps={{
+                            style: {
+                              color: "black", // Change text color
+                              borderColor: "#f798a1",
+                            },
+                            focused: {
+                              borderColor: "#55766f", // Change focus border color
+                              color: "#55766f", // Change text color
+                              
+                            },
+                          }}
+                        >      
                                     {siteList.map((siteDetails)=>(
                                         <MenuItem value={siteDetails.site_id} >{siteDetails.name}</MenuItem>   
                                     ))}
@@ -168,14 +204,50 @@ function Dashboard() {
                 <div className='row' style={{marginLeft:0}}>
                 
                     <div className='col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12' style={{marginRight:0, marginTop:10}}>
-                        <TextField id="standard-select-currency" name='workId'  disabled={disableCreateLabourField || workFieldDisable} onChange={(event) => setWorkId(event.target.value)} value={workId} select label="Work" defaultValue="" variant="standard" fullWidth>      
+                        <TextField id="standard-select-currency" name='workId'  disabled={disableCreateLabourField || workFieldDisable} onChange={(event) => setWorkId(event.target.value)} value={workId} select label="Work" defaultValue="" variant="standard" fullWidth
+                        InputLabelProps={{
+                            style: {
+                              color: "#21ad01", // Change this to your desired label color
+                              borderColor: "#21ad01",
+                            },
+                          }}
+                          InputProps={{
+                            style: {
+                              color: "black", // Change text color
+                              borderColor: "#f798a1",
+                            },
+                            focused: {
+                              borderColor: "#55766f", // Change focus border color
+                              color: "#55766f", // Change text color
+                              
+                            },
+                          }}
+                        >      
                                     {workList.map((workDetails)=>(
                                         <MenuItem value={workDetails.work_id} >{workDetails.work_type}</MenuItem>   
                                     ))}
                         </TextField>
                     </div>
                     <div className='col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12'>
-                        <TextField  margin="dense"  name='purpose'  disabled={disableCreateLabourField} onChange={event => handleCreateCustoemrFormChange(event)} value={createLabourFormFields.purpose} label="Purpose" multiline placeholder='3 main window- 20*30' type="text" fullWidth variant="standard"/>
+                        <TextField  margin="dense"  name='purpose'  disabled={disableCreateLabourField} onChange={event => handleCreateCustoemrFormChange(event)} value={createLabourFormFields.purpose} label="Purpose" multiline placeholder='3 main window- 20*30' type="text" fullWidth variant="standard"
+                        InputLabelProps={{
+                            style: {
+                              color: "#21ad01", // Change this to your desired label color
+                              borderColor: "#21ad01",
+                            },
+                          }}
+                          InputProps={{
+                            style: {
+                              color: "black", // Change text color
+                              borderColor: "#f798a1",
+                            },
+                            focused: {
+                              borderColor: "#55766f", // Change focus border color
+                              color: "#55766f", // Change text color
+                              
+                            },
+                          }}
+                        />
                     </div>
                     
                 </div>
@@ -185,22 +257,93 @@ function Dashboard() {
                         <TextField  margin="dense"  name='qty'  disabled={disableCreateLabourField} onChange={event => handleCreateCustoemrFormChange(event)} value={createLabourFormFields.qty} label="Quantity" placeholder='5' type="number" fullWidth variant="standard"/>
                     </div> */}
                     <div className='col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12'>
-                    <TextField  margin="dense"  name='price'  disabled={disableCreateLabourField} onChange={event => handleCreateCustoemrFormChange(event)} value={createLabourFormFields.price} label="Price" placeholder='5' type="number" fullWidth variant="standard"/>
+                    <TextField  margin="dense"  name='price'  disabled={disableCreateLabourField} onChange={event => handleCreateCustoemrFormChange(event)} value={createLabourFormFields.price} label="Price" placeholder='5' type="number" fullWidth variant="standard"
+                    InputLabelProps={{
+                        style: {
+                          color: "#21ad01", // Change this to your desired label color
+                          borderColor: "#21ad01",
+                        },
+                      }}
+                      InputProps={{
+                        style: {
+                          color: "black", // Change text color
+                          borderColor: "#f798a1",
+                        },
+                        focused: {
+                          borderColor: "#55766f", // Change focus border color
+                          color: "#55766f", // Change text color
+                          
+                        },
+                      }}
+                    />
                  
                     </div>
                     <div className='col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12'>
                    
-                        <TextField  margin="dense"  name='from_date'  disabled={disableCreateLabourField} onChange={event => handleCreateCustoemrFormChange(event)} value={createLabourFormFields.from_date} label="Date" type="datetime-local" fullWidth variant="standard"/>
+                        <TextField  margin="dense"  name='from_date'  disabled={disableCreateLabourField} onChange={event => handleCreateCustoemrFormChange(event)} value={createLabourFormFields.from_date} label="Date" type="datetime-local" fullWidth variant="standard"
+                        InputLabelProps={{
+                            style: {
+                              color: "#21ad01", // Change this to your desired label color
+                              borderColor: "#21ad01",
+                            },
+                          }}
+                          InputProps={{
+                            style: {
+                              color: "black", // Change text color
+                              borderColor: "#f798a1",
+                            },
+                            focused: {
+                              borderColor: "#55766f", // Change focus border color
+                              color: "#55766f", // Change text color
+                              
+                            },
+                          }}
+                        />
                     </div>
                 </div>
                 <div className='row' style={{marginLeft:0}}>
                     
                     <div className='col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12'>
-                    <TextField  margin="dense"  name='dealer_name'  disabled={disableCreateLabourField} onChange={event => handleCreateCustoemrFormChange(event)} value={createLabourFormFields.dealer_name} label="Labour/Dealer Name" type="text" fullWidth variant="standard"/>
+                    <TextField  margin="dense"  name='dealer_name'  disabled={disableCreateLabourField} onChange={event => handleCreateCustoemrFormChange(event)} value={createLabourFormFields.dealer_name} label="Labour/Dealer Name" type="text" fullWidth variant="standard"
+                    InputLabelProps={{
+                        style: {
+                          color: "#21ad01", // Change this to your desired label color
+                          borderColor: "#21ad01",
+                        },
+                      }}
+                      InputProps={{
+                        style: {
+                          color: "black", // Change text color
+                          borderColor: "#f798a1",
+                        },
+                        focused: {
+                          borderColor: "#55766f", // Change focus border color
+                          color: "#55766f", // Change text color
+                          
+                        },
+                      }}
+                    />
                    
                     </div>
                     <div className='col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12' style={{marginTop:10}}>
-                    <TextField size='small' select name='mop'  disabled={disableCreateLabourField} onChange={event => handleCreateCustoemrFormChange(event)} value={createLabourFormFields.mop}  placeholder='Done'  label="Mode Of Payment" defaultValue="Cash" fullWidth variant="standard"  >
+                    <TextField size='small' select name='mop'  disabled={disableCreateLabourField} onChange={event => handleCreateCustoemrFormChange(event)} value={createLabourFormFields.mop}  placeholder='Done'  label="Mode Of Payment" defaultValue="Cash" fullWidth variant="standard" 
+                    InputLabelProps={{
+                        style: {
+                          color: "#21ad01", // Change this to your desired label color
+                          borderColor: "#21ad01",
+                        },
+                      }}
+                      InputProps={{
+                        style: {
+                          color: "black", // Change text color
+                          borderColor: "#f798a1",
+                        },
+                        focused: {
+                          borderColor: "#55766f", // Change focus border color
+                          color: "#55766f", // Change text color
+                          
+                        },
+                      }}  >
                                 <MenuItem value={"Cash"}>Cash</MenuItem>
                                 <MenuItem  value={"Phone-Pay"}>Phone Pay </MenuItem>
                                 <MenuItem  value={"PayTM"}>PayTM </MenuItem>
@@ -212,11 +355,25 @@ function Dashboard() {
                 </div>
                 
                 
-                <div className="row" style={{display:'flex', justifyContent:'flex-end', marginRight:0, marginTop:20, marginBottom:20}}>
+                {/* <div className="row" style={{display:'flex', justifyContent:'flex-end', marginRight:0, marginTop:20, marginBottom:20}}>
                     <Button onClick={()=>navigate('/home')} disabled={disableCreateLabourField}  style={{backgroundColor:'#5F5E5E', height:30, width:90, textAlign:'center', marginRight:20, padding:0, fontSize:12, fontWeight:600, borderRadius:3, boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.25)', border:'0px', color:'white'}}>Cancel</Button>
                     <Button variant='contained' color='primary' onClick={()=>{createLabour()} } style={{backgroundColor:'', height:30, width:90, textAlign:'center', marginRight:0, padding:0, fontSize:12, fontWeight:600, borderRadius:3, boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.25)', border:'0px', color:'white'}} disabled={disableCreateLabourField || customerId=="" ||siteId=="" ||workId==""  || createLabourFormFields.purpose=="" || createLabourFormFields.mop=="" || createLabourFormFields.from_date=="" || createLabourFormFields.to_date=="" || createLabourFormFields.qty==""|| createLabourFormFields.price==""  }>Create</Button>               
-                </div>  
+                </div>   */}
           
+                <DialogActions style={{marginTop:50}}>
+                <Button style={{color:'gray'}} 
+                onClick={()=>navigate('/home')}
+                >Cancel</Button>
+
+                <Button style={{
+                    color:'white',
+                    backgroundColor:(disableCreateLabourField || customerId=="" ||siteId=="" ||workId==""  || createLabourFormFields.purpose=="" || createLabourFormFields.mop=="" || createLabourFormFields.from_date=="" || createLabourFormFields.to_date=="" || createLabourFormFields.qty==""|| createLabourFormFields.price==""  )? 'lightgray': '#21ad01'
+                }} 
+                onClick={()=>{createLabour()} }
+                disabled={disableCreateLabourField || customerId=="" ||siteId=="" ||workId==""  || createLabourFormFields.purpose=="" || createLabourFormFields.mop=="" || createLabourFormFields.from_date=="" || createLabourFormFields.to_date=="" || createLabourFormFields.qty==""|| createLabourFormFields.price==""   }
+                >Create</Button>
+        </DialogActions>
+                
     </div>
           
     </>

@@ -8,9 +8,8 @@ import {
 } from "react-router-dom";
 import PrivateRoutes from "./privateroutes/PrivateRoutes";
 import { SuccessExistcontext, Successcontext, UserIdContext } from "../src/components/context/Authcontext";
-import Home from './screen/Home/Home';
+
 import Login from './screen/login/Login';
-import ResetPassword from './components/resetpwd/ResetPassword';
 
 import CustomerDetails from "./screen/customerDetails/CustomerDetails";
 import CreateCustomer from "./screen/crateCustomer/CreateCustomer";
@@ -19,7 +18,8 @@ import CreateWork from "./screen/crateWork/CreateWork";
 import CreateLabour from "./screen/crateLabour/CreateLabour";
 import CreateMaterial from "./screen/createMaterial/CreateMaterial";
 import CreatePayment from "./screen/cratePayment/CreatePayment";
-import History from "./screen/history/History";
+import Home from "./screen/Home/Home";
+import CustomerList from "./screen/CustomerList/CustomerList";
 
 
 export const AuthContext = createContext();
@@ -40,8 +40,8 @@ function App() {
                 <Route path="/" element={<Login />} />
                 <Route exact element={<PrivateRoutes />}>
                     {/* <Route path="/register" element={<Register />} /> */}
-                    <Route path="/resetpwd" element={<ResetPassword />} />
-                    <Route path="/home" element={<Home />} />
+                    {/* <Route path="/resetpwd" element={<ResetPassword />} /> */}
+                    <Route path="/customer-list" element={<CustomerList />} />
                     <Route path="/customer-details/:customerId" element={<CustomerDetails />} />
                     <Route path="/create-customer" element={<CreateCustomer />} />
                     <Route path="/create-site" element={<CreateSite />} />
@@ -49,7 +49,7 @@ function App() {
                     <Route path="/create-labour" element={<CreateLabour />} />
                     <Route path="/create-material" element={<CreateMaterial />} />
                     <Route path="/create-payment" element={<CreatePayment />} />
-                    <Route path="/history" element={<History />} />
+                    <Route path="/home" element={<Home />} />
                 </Route>
               </Routes>
             </UserIdContext.Provider>

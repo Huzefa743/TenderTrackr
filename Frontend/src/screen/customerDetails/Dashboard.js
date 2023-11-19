@@ -208,6 +208,11 @@ const [createLabourFormFields, setCreateLabourFormFileds] = useState({
     dealer_name:''
 })
 
+const buttonStyle = {
+  backgroundColor: '#21ad01', // Your desired background color
+  color: 'white', // Text color (optional, adjust as needed)
+};
+
 const handleUpdateLabourFormChange= (event)=>{
     console.log( event.target.name)
     let data = {...createLabourFormFields}
@@ -312,36 +317,36 @@ async function fetchMaterialDetailsByMaterialId(materialId){
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel1a-content"
                             id="panel1a-header">
-                            <Typography style={{color:'black', fontWeight:600}}>Customer Details</Typography>
+                            <Typography style={{color:'black', fontWeight:600}}><span className='history-heading'>Customer Details</span></Typography>
                             </AccordionSummary>
                             <AccordionDetails>
                             <Typography>
                             
                             <div className='row' style={{marginLeft:0, width:'100%', backgroundColor:'', height: 'auto', marginBottom:0}}>
                                 <div className='col-lg-6 col-sm-12 col-xs-12'>
-                                        <p style={{color:'gray', fontWeight:500, marginTop:8}}>Customer Name : <span style={{color:'black'}}>{customerDetails.name} </span></p>
+                                        <p style={{color:'gray', fontWeight:500, marginTop:8}}><span className='history-heading'>Customer Name : <span style={{color:'black'}}>{customerDetails.name}</span> </span></p>
                                 </div>
                                 <div className='col-lg-6 col-sm-12 col-xs-12'>
-                                        <p style={{color:'gray', fontWeight:500, marginTop:8}}>Mobile : <span style={{color:'black'}}>{customerDetails.mobile}</span></p>
+                                        <p style={{color:'gray', fontWeight:500, marginTop:8}}><span className='history-heading'>Mobile : <span style={{color:'black'}}>{customerDetails.mobile}</span></span></p>
                                 </div>
                             </div>
                             <div className='row' style={{marginLeft:0, width:'100%', backgroundColor:'', height: 'auto', marginBottom:0}}>
                                 <div className='col-lg-6 col-sm-12 col-xs-12'>
-                                        <p style={{color:'gray', fontWeight:500, marginTop:8}}>Email ID :  <span style={{color:'black'}}>{customerDetails.email}</span></p>
+                                        <p style={{color:'gray', fontWeight:500, marginTop:8}}><span className='history-heading'>Email ID :  <span style={{color:'black'}}>{customerDetails.email}</span></span></p>
                                 </div>
                                 <div className='col-lg-6 col-sm-12 col-xs-12'>
-                                        <p style={{color:'gray', fontWeight:500, marginTop:8}}>GST :  <span style={{color:'black'}}>{customerDetails.gst}</span></p>
+                                        <p style={{color:'gray', fontWeight:500, marginTop:8}}><span className='history-heading'>GST :  <span style={{color:'black'}}>{customerDetails.gst}</span></span></p>
                                 </div>
                             </div>
                             <div className='row' style={{marginLeft:0, width:'100%', backgroundColor:'', height: 'auto', marginBottom:0}}>
                                
                                 <div className='col-lg-6 col-sm-12 col-xs-12'>
-                                        <p style={{color:'gray', fontWeight:500, marginTop:8}}>Address : <span style={{color:'black'}}>{customerDetails.address}</span></p>
+                                        <p style={{color:'gray', fontWeight:500, marginTop:8}}><span className='history-heading'>Address : <span style={{color:'black'}}>{customerDetails.address}</span></span></p>
                                 </div>
                                 
                             </div>
                             <div className="row" style={{display:'flex', justifyContent:'flex-end', marginRight:0}}>
-        <IconButton aria-label="delete"  color="primary" style={{ width:40, textAlign:'right', }}><EditIcon color='action'/></IconButton>
+        {/* <IconButton aria-label="delete"  color="primary" style={{ width:40, textAlign:'right', }}><EditIcon color='action'/></IconButton> */}
         {/* <IconButton  aria-label="delete"  color="primary"  style={{  width:40, textAlign:'right', }} onClick={()=>deleteCustomer(customerDetails.cust_id)}><DeleteIcon color='error'/></IconButton>                      */}
      </div>
                           
@@ -351,28 +356,28 @@ async function fetchMaterialDetailsByMaterialId(materialId){
    </Accordion>
 
 {/* --------payment details ---------------------- */}
-<Accordion style={{marginBottom:10, paddingLeft:0, paddingRight:0, marginTop:10}}>
+<Accordion defaultExpanded={true} style={{marginBottom:10, paddingLeft:0, paddingRight:0, marginTop:10}}>
                             <AccordionSummary style={{backgroundColor:'lightgray',}}
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel1a-content"
                             id="panel1a-header">
-                            <Typography style={{color:'black', fontWeight:600}}>Payment Details</Typography>
+                            <Typography style={{color:'black', fontWeight:600}}><span className='history-heading'>Payment Details</span></Typography>
                             </AccordionSummary>
                             <AccordionDetails style={{padding:0}}>
                             <Typography >
                                 <div className='row' style={{padding:0, margin:0, marginTop:10}}>
-                                    <p>Total Credit Payment: {customerTotalCreditPayment}</p>
-                                    <p>Total Debit Payment: {customerTotalDebitPayment}</p>
-                                    <p>Total Balance Payment: {customerTotalBalancePayment}</p>
+                                    <p className='history-heading'>Total Credit Payment: {customerTotalCreditPayment}</p>
+                                    <p className='history-heading'>Total Debit Payment: {customerTotalDebitPayment}</p>
+                                    <p className='history-heading'>Total Balance Payment: {customerTotalBalancePayment}</p>
                                 </div>
                             <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
             <StyledTableCell>Date</StyledTableCell>
-            <StyledTableCell sx={{minWidth:140}} align='center'>Amount</StyledTableCell>
+            <StyledTableCell sx={{minWidth:140}} align='center'><span className='history-heading'>Amount</span></StyledTableCell>
             {/* <StyledTableCell >Action</StyledTableCell> */}
-            <StyledTableCell sx={{minWidth:120}} align='center'>MOP</StyledTableCell>
+            <StyledTableCell sx={{minWidth:120}} align='center'><span className='history-heading'>MOP</span></StyledTableCell>
             <StyledTableCell >Remark</StyledTableCell>
             <StyledTableCell >Delete</StyledTableCell>
           </TableRow>
@@ -381,18 +386,18 @@ async function fetchMaterialDetailsByMaterialId(materialId){
           {paymentList.map((paymentDetails) => (
             <StyledTableRow >
               <StyledTableCell component="th" scope="row">
-                {paymentDetails.date}
+              <span className='history-heading'>{paymentDetails.date}</span>
               </StyledTableCell>
               <StyledTableCell align='right'>
-                {paymentDetails.action=="Credit"? <IconButton aria-label="delete" style={{display:'inline-block'}}>
+             {paymentDetails.action=="Credit"? <IconButton aria-label="delete" style={{display:'inline-block'}}>
                 <TrendingDownIcon color='success'/>
               </IconButton>:
               <IconButton aria-label="delete" style={{display:'inline-block'}}>
               <TrendingUpIcon color='error'/>
-            </IconButton>}{(paymentDetails.amount).toFixed(2)}</StyledTableCell>
+            </IconButton>} <span className='history-heading'>{(paymentDetails.amount).toFixed(2)}</span></StyledTableCell>
               {/* <StyledTableCell>{paymentDetails.action}</StyledTableCell> */}
-              <StyledTableCell>{paymentDetails.mop}</StyledTableCell>
-              <StyledTableCell>{paymentDetails.remark}</StyledTableCell>
+              <StyledTableCell><span className='history-heading'>{paymentDetails.mop}</span></StyledTableCell>
+              <StyledTableCell><span className='history-heading'>{paymentDetails.remark}</span></StyledTableCell>
               <StyledTableCell>
                     <IconButton aria-label="delete" style={{display:'inline-block'}} onClick={()=>deletePayment(paymentDetails.payment_id)}>
                         <DeleteIcon color='error'/>
@@ -412,12 +417,12 @@ async function fetchMaterialDetailsByMaterialId(materialId){
 
 {/* site details--------------------- */}
 
-<Accordion style={{marginBottom:50, paddingLeft:0, paddingRight:0, marginTop:10}}>
+<Accordion defaultExpanded={true} style={{marginBottom:50, paddingLeft:0, paddingRight:0, marginTop:10}}>
                             <AccordionSummary style={{backgroundColor:'lightgray',}}
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel1a-content"
                             id="panel1a-header">
-                            <Typography style={{color:'black', fontWeight:600}}>Sites Details</Typography>
+                            <Typography style={{color:'black', fontWeight:600}}><span className='history-heading'>Sites Details</span></Typography>
                             </AccordionSummary>
                             <AccordionDetails>
                             <Typography>
@@ -429,9 +434,9 @@ async function fetchMaterialDetailsByMaterialId(materialId){
                                     id="panel1bh-header"
                                     >
                                     <Typography sx={{ width: '33%', flexShrink: 0 }}>
-                                        {siteDetails.name}
+                                    <span className='history-heading'>{siteDetails.name}</span>
                                     </Typography>
-                                    <Typography sx={{ color: 'text.secondary' }}>{siteDetails.address}</Typography>
+                                    <Typography sx={{ color: 'text.secondary' }}><span className='history-heading'>{siteDetails.address}</span></Typography>
                                     </AccordionSummary>
                                     <AccordionDetails>
                                     <Typography>
@@ -440,10 +445,10 @@ async function fetchMaterialDetailsByMaterialId(materialId){
                                             <ListItem >
                                                 <ListItemAvatar onClick={()=>(fetchLabourList(workDetails.work_id), fetchMaterialList(workDetails.work_id), setSelectedWorkType(workDetails.work_type), setMaterialDetailsModalShow(true),setSelectedWorkUpdateId(workDetails.work_id) )}>
                                                 <Avatar>
-                                                    <WorkIcon color='info'/>
+                                                    <WorkIcon style={{color:'#21ad01'}}/>
                                                 </Avatar>
                                                 </ListItemAvatar>
-                                                <ListItemText primary={workDetails.work_type} secondary={"Status : "+workDetails.status} onClick={()=>(fetchLabourList(workDetails.work_id), fetchMaterialList(workDetails.work_id), setSelectedWorkType(workDetails.work_type), setMaterialDetailsModalShow(true),setSelectedWorkUpdateId(workDetails.work_id) )}/>
+                                                <ListItemText primary=<span className='history-heading'>{workDetails.work_type}</span> secondary=<span className='history-heading'>{"Status : "+workDetails.status}</span> onClick={()=>(fetchLabourList(workDetails.work_id), fetchMaterialList(workDetails.work_id), setSelectedWorkType(workDetails.work_type), setMaterialDetailsModalShow(true),setSelectedWorkUpdateId(workDetails.work_id) )}/>
                                                 <IconButton aria-label="delete"  color="primary" style={{ width:40, textAlign:'right', }} onClick={()=>(setWorkUpdateDialogVisible(true), fetchWorkDetailsByWorkId(workDetails.work_id), setSelectedWorkUpdateId(workDetails.work_id))}><EditIcon color='action'/></IconButton>
                                                 {/* <IconButton  aria-label="delete"  color="primary"  style={{  width:40, textAlign:'right', }}><DeleteIcon color='error'/></IconButton>                      */}
    
@@ -454,10 +459,10 @@ async function fetchMaterialDetailsByMaterialId(materialId){
                                         ))}
                                            
                                     </Typography>
-                                    <div className="row" style={{display:'flex', justifyContent:'flex-end', marginRight:0}}>
+                                    {/* <div className="row" style={{display:'flex', justifyContent:'flex-end', marginRight:0}}>
         <IconButton aria-label="delete"  color="primary" style={{ width:40, textAlign:'right', }}><EditIcon color='action'/></IconButton>
-        {/* <IconButton  aria-label="delete"  color="primary"  style={{  width:40, textAlign:'right', }}><DeleteIcon color='error'/></IconButton>                      */}
-     </div>
+        <IconButton  aria-label="delete"  color="primary"  style={{  width:40, textAlign:'right', }}><DeleteIcon color='error'/></IconButton>                     
+     </div> */}
                                     </AccordionDetails>
                                 </Accordion>
                                 ))}
@@ -477,7 +482,7 @@ async function fetchMaterialDetailsByMaterialId(materialId){
          hidden={!materialDetailsModalShow}
         disableScrollLock
         >
-          <AppBar sx={{ position: '' }}>
+          <AppBar sx={{ position: '' }} style={{backgroundColor:'#21ad01'}}>
             <Toolbar>
 
               <Typography sx={{ ml: 0, flex: 1 }} variant="h6" component="div">
@@ -562,7 +567,7 @@ async function fetchMaterialDetailsByMaterialId(materialId){
                                         Mode of Payment : <span style={{color:'black'}}>{materialDetails.mop}</span>
                                     </Typography>
                                    
-                                    <img style={{marginTop:20, width:'100%', height:'auto'}} onClick={()=>{setreceiptPreview(true)}} src={"https://craftshome.up.railway.app/api/v1/material-receipt/"+materialDetails.material_id}></img>
+                                    <img style={{marginTop:20, width:'auto', height:'auto', maxHeight:'100vh'}} onClick={()=>{setreceiptPreview(true)}} src={"http://localhost:8080/api/v1/material-receipt/"+materialDetails.material_id}></img>
                                      {/* image dilog box */}
 
                                      <Dialog
@@ -578,7 +583,7 @@ async function fetchMaterialDetailsByMaterialId(materialId){
                                         /> */}
                                         <img
                                         style={{ maxWidth: "100%", maxHeight: "calc(100vh - 64px)" }}
-                                        src={"https://craftshome.up.railway.app/api/v1/material-receipt/"+materialDetails.material_id}
+                                        src={"http://localhost:8080/api/v1/material-receipt/"+materialDetails.material_id}
                                         alt="image"
                                         />
                                     </Dialog>
@@ -609,18 +614,90 @@ async function fetchMaterialDetailsByMaterialId(materialId){
          
                 <div className='row' style={{marginLeft:0}}>
                     <div className='col-12'>
-                        <TextField  margin="dense"  name='description'  disabled={disableCreateWorkField} onChange={event => handleCreateCustoemrFormChange(event)} value={createWorkFormFields.description} label="Description" multiline placeholder='3 main window - 20*30cm in 5 mm, 2 side window - 40*50 in 9mm' type="text" fullWidth variant="standard"/>
+                        <TextField  margin="dense"  name='description'  disabled={disableCreateWorkField} onChange={event => handleCreateCustoemrFormChange(event)} value={createWorkFormFields.description} label="Description" multiline placeholder='3 main window - 20*30cm in 5 mm, 2 side window - 40*50 in 9mm' type="text" fullWidth variant="standard"
+                        InputLabelProps={{
+                          style: {
+                            color: "#21ad01", // Change this to your desired label color
+                            borderColor: "#21ad01",
+                          },
+                        }}
+                        InputProps={{
+                          style: {
+                            color: "black", // Change text color
+                            borderColor: "#f798a1",
+                          },
+                          focused: {
+                            borderColor: "#55766f", // Change focus border color
+                            color: "#55766f", // Change text color
+                            
+                          },
+                        }}
+                        />
                     </div>
                     <div className='col-12'>
-                        <TextField  margin="dense"  name='work_type'  disabled={disableCreateWorkField} onChange={event => handleCreateCustoemrFormChange(event)} value={createWorkFormFields.work_type} label="Work Type" placeholder='Glass' type="text" fullWidth variant="standard"/>
+                        <TextField  margin="dense"  name='work_type'  disabled={disableCreateWorkField} onChange={event => handleCreateCustoemrFormChange(event)} value={createWorkFormFields.work_type} label="Work Type" placeholder='Glass' type="text" fullWidth variant="standard"
+                        InputLabelProps={{
+                          style: {
+                            color: "#21ad01", // Change this to your desired label color
+                            borderColor: "#21ad01",
+                          },
+                        }}
+                        InputProps={{
+                          style: {
+                            color: "black", // Change text color
+                            borderColor: "#f798a1",
+                          },
+                          focused: {
+                            borderColor: "#55766f", // Change focus border color
+                            color: "#55766f", // Change text color
+                            
+                          },
+                        }}
+                        />
                     </div>
                 </div>
                 <div className='row' style={{marginLeft:0}}>
                     <div className='col-12'>
-                        <TextField  margin="dense"  name='estimate_days'  disabled={disableCreateWorkField} onChange={event => handleCreateCustoemrFormChange(event)} value={createWorkFormFields.estimate_days} label="Estimate Days" placeholder='5' type="number" fullWidth variant="standard"/>
+                        <TextField  margin="dense"  name='estimate_days'  disabled={disableCreateWorkField} onChange={event => handleCreateCustoemrFormChange(event)} value={createWorkFormFields.estimate_days} label="Estimate Days" placeholder='5' type="number" fullWidth variant="standard"
+                        InputLabelProps={{
+                          style: {
+                            color: "#21ad01", // Change this to your desired label color
+                            borderColor: "#21ad01",
+                          },
+                        }}
+                        InputProps={{
+                          style: {
+                            color: "black", // Change text color
+                            borderColor: "#f798a1",
+                          },
+                          focused: {
+                            borderColor: "#55766f", // Change focus border color
+                            color: "#55766f", // Change text color
+                            
+                          },
+                        }}
+                        />
                     </div>
                     <div className='col-12'>
-                        <TextField size='small' select name='status'  disabled={disableCreateWorkField} onChange={event => handleCreateCustoemrFormChange(event)} value={createWorkFormFields.status}  placeholder='Done'  label="Status" fullWidth variant="standard"  >
+                        <TextField size='small' select name='status'  disabled={disableCreateWorkField} onChange={event => handleCreateCustoemrFormChange(event)} value={createWorkFormFields.status}  placeholder='Done'  label="Status" fullWidth variant="standard"  
+                        InputLabelProps={{
+                          style: {
+                            color: "#21ad01", // Change this to your desired label color
+                            borderColor: "#21ad01",
+                          },
+                        }}
+                        InputProps={{
+                          style: {
+                            color: "black", // Change text color
+                            borderColor: "#f798a1",
+                          },
+                          focused: {
+                            borderColor: "#55766f", // Change focus border color
+                            color: "#55766f", // Change text color
+                            
+                          },
+                        }}
+                        >
                                 <MenuItem value={"Not-Yet-Start"}>Not Yet Start</MenuItem>
                                 <MenuItem  value={"Hold"}>Hold </MenuItem>
                                 <MenuItem  value={"In-Progress"}>In-Progress</MenuItem>
@@ -630,8 +707,9 @@ async function fetchMaterialDetailsByMaterialId(materialId){
                 </div>
         </DialogContent>
         <DialogActions>
-          <Button onClick={()=>setWorkUpdateDialogVisible(false)}>Cancel</Button>
-          <Button onClick={()=>{updateWork()}}>Update</Button>
+       
+          <Button style={{color:'gray'}} onClick={()=>setWorkUpdateDialogVisible(false)}>Cancel</Button>
+          <Button style={buttonStyle} onClick={()=>{updateWork()}}>Update</Button>
         </DialogActions>
       </Dialog>
 
@@ -639,7 +717,7 @@ async function fetchMaterialDetailsByMaterialId(materialId){
 
 {/* --------dialog for update labour details */}
 <Dialog open={labourUpdateDialogVisible} onClose={()=>setLabourUpdateDialogVisible(false)}>
-        <DialogTitle>Update Work Status</DialogTitle>
+        <DialogTitle>Update Labour Details</DialogTitle>
         <DialogContent>
           <DialogContentText>
             
@@ -647,10 +725,46 @@ async function fetchMaterialDetailsByMaterialId(materialId){
           <div className='row' style={{marginLeft:0}}>
                 
                     <div className='col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12'>
-                        <TextField  margin="dense"  name='purpose'  disabled={disableCreateLabourField} onChange={event => handleUpdateLabourFormChange(event)} value={createLabourFormFields.purpose} label="Purpose" multiline placeholder='3 main window- 20*30' type="text" fullWidth variant="standard"/>
+                        <TextField  margin="dense"  name='purpose'  disabled={disableCreateLabourField} onChange={event => handleUpdateLabourFormChange(event)} value={createLabourFormFields.purpose} label="Purpose" multiline placeholder='3 main window- 20*30' type="text" fullWidth variant="standard"
+                        InputLabelProps={{
+                          style: {
+                            color: "#21ad01", // Change this to your desired label color
+                            borderColor: "#21ad01",
+                          },
+                        }}
+                        InputProps={{
+                          style: {
+                            color: "black", // Change text color
+                            borderColor: "#f798a1",
+                          },
+                          focused: {
+                            borderColor: "#55766f", // Change focus border color
+                            color: "#55766f", // Change text color
+                            
+                          },
+                        }}
+                        />
                     </div>
                     <div className='col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12'>
-                        <TextField  margin="dense"  name='dealer_name'  disabled={disableCreateLabourField} onChange={event => handleUpdateLabourFormChange(event)} value={createLabourFormFields.dealer_name} label="Delaer/Labour Name" placeholder='5' type="text" fullWidth variant="standard"/>
+                        <TextField  margin="dense"  name='dealer_name'  disabled={disableCreateLabourField} onChange={event => handleUpdateLabourFormChange(event)} value={createLabourFormFields.dealer_name} label="Delaer/Labour Name" placeholder='5' type="text" fullWidth variant="standard"
+                        InputLabelProps={{
+                          style: {
+                            color: "#21ad01", // Change this to your desired label color
+                            borderColor: "#21ad01",
+                          },
+                        }}
+                        InputProps={{
+                          style: {
+                            color: "black", // Change text color
+                            borderColor: "#f798a1",
+                          },
+                          focused: {
+                            borderColor: "#55766f", // Change focus border color
+                            color: "#55766f", // Change text color
+                            
+                          },
+                        }}
+                        />
                     </div>
                     
                 </div>
@@ -658,18 +772,72 @@ async function fetchMaterialDetailsByMaterialId(materialId){
                 <div className='row' style={{marginLeft:0}}>
                    
                     <div className='col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12'>
-                    <TextField  margin="dense"  name='price'  disabled={disableCreateLabourField} onChange={event => handleUpdateLabourFormChange(event)} value={createLabourFormFields.price} label="Price" placeholder='5' type="number" fullWidth variant="standard"/>
+                    <TextField  margin="dense"  name='price'  disabled={disableCreateLabourField} onChange={event => handleUpdateLabourFormChange(event)} value={createLabourFormFields.price} label="Price" placeholder='5' type="number" fullWidth variant="standard"
+                    InputLabelProps={{
+                      style: {
+                        color: "#21ad01", // Change this to your desired label color
+                        borderColor: "#21ad01",
+                      },
+                    }}
+                    InputProps={{
+                      style: {
+                        color: "black", // Change text color
+                        borderColor: "#f798a1",
+                      },
+                      focused: {
+                        borderColor: "#55766f", // Change focus border color
+                        color: "#55766f", // Change text color
+                        
+                      },
+                    }}
+                    />
                  
                     </div>
                     <div className='col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12'>
                    
-                        <TextField  margin="dense"  name='from_date'  disabled={disableCreateLabourField} onChange={event => handleUpdateLabourFormChange(event)} value={createLabourFormFields.from_date} label="From Date" type="datetime-local" fullWidth variant="standard"/>
+                        <TextField  margin="dense"  name='from_date'  disabled={disableCreateLabourField} onChange={event => handleUpdateLabourFormChange(event)} value={createLabourFormFields.from_date} label="From Date" type="datetime-local" fullWidth variant="standard"
+                        InputLabelProps={{
+                          style: {
+                            color: "#21ad01", // Change this to your desired label color
+                            borderColor: "#21ad01",
+                          },
+                        }}
+                        InputProps={{
+                          style: {
+                            color: "black", // Change text color
+                            borderColor: "#f798a1",
+                          },
+                          focused: {
+                            borderColor: "#55766f", // Change focus border color
+                            color: "#55766f", // Change text color
+                            
+                          },
+                        }}
+                        />
                     </div>
                 </div>
                 <div className='row' style={{marginLeft:0}}>
                     
                     <div className='col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12' style={{marginTop:10}}>
-                    <TextField size='small' select name='mop'  disabled={disableCreateLabourField} onChange={event => handleUpdateLabourFormChange(event)} value={createLabourFormFields.mop}  placeholder='Done'  label="Mode Of Payment" fullWidth variant="standard"  >
+                    <TextField size='small' select name='mop'  disabled={disableCreateLabourField} onChange={event => handleUpdateLabourFormChange(event)} value={createLabourFormFields.mop}  placeholder='Done'  label="Mode Of Payment" fullWidth variant="standard" 
+                    InputLabelProps={{
+                      style: {
+                        color: "#21ad01", // Change this to your desired label color
+                        borderColor: "#21ad01",
+                      },
+                    }}
+                    InputProps={{
+                      style: {
+                        color: "black", // Change text color
+                        borderColor: "#f798a1",
+                      },
+                      focused: {
+                        borderColor: "#55766f", // Change focus border color
+                        color: "#55766f", // Change text color
+                        
+                      },
+                    }}
+                    >
                                 <MenuItem value={"Cash"}>Cash</MenuItem>
                                 <MenuItem  value={"Phone-Pay"}>Phone Pay </MenuItem>
                                 <MenuItem  value={"PayTM"}>PayTM </MenuItem>
@@ -684,8 +852,8 @@ async function fetchMaterialDetailsByMaterialId(materialId){
                
         </DialogContent>
         <DialogActions>
-          <Button onClick={()=>setLabourUpdateDialogVisible(false)}>Cancel</Button>
-          <Button onClick={()=>{updateLabour()}}>Update</Button>
+          <Button style={{color:'gray'}} onClick={()=>setLabourUpdateDialogVisible(false)}>Cancel</Button>
+          <Button style={buttonStyle} onClick={()=>{updateLabour()}}>Update</Button>
         </DialogActions>
       </Dialog>
 
@@ -693,35 +861,125 @@ async function fetchMaterialDetailsByMaterialId(materialId){
 
 {/* --------dialog for update material details */}
 <Dialog open={materialUpdateDialogVisible} onClose={()=>setMaterialUpdateDialogVisible(false)}>
-        <DialogTitle>Update Work Status</DialogTitle>
+        <DialogTitle>Update Material Details</DialogTitle>
         <DialogContent>
           <DialogContentText>
             
           </DialogContentText>
           <div className='row' style={{marginLeft:0}}>
                 <div className='col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12'>
-                    <TextField  margin="dense"  name='name'  disabled={disableCreateMaterialField} onChange={event => handleUpdateMaterialFormChange(event)} value={createMaterialFormFields.name} label="Material Name" multiline placeholder='3 main window- 20*30' type="text" fullWidth variant="standard"/>
+                    <TextField  margin="dense"  name='name'  disabled={disableCreateMaterialField} onChange={event => handleUpdateMaterialFormChange(event)} value={createMaterialFormFields.name} label="Material Name" multiline placeholder='3 main window- 20*30' type="text" fullWidth variant="standard"
+                    InputLabelProps={{
+                      style: {
+                        color: "#21ad01", // Change this to your desired label color
+                        borderColor: "#21ad01",
+                      },
+                    }}
+                    InputProps={{
+                      style: {
+                        color: "black", // Change text color
+                        borderColor: "#f798a1",
+                      },
+                      focused: {
+                        borderColor: "#55766f", // Change focus border color
+                        color: "#55766f", // Change text color
+                        
+                      },
+                    }}
+                    />
                 </div>
                 <div className='col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12'>
-                    <TextField  margin="dense"  name='dealer_name'  disabled={disableCreateMaterialField} onChange={event => handleUpdateMaterialFormChange(event)} value={createMaterialFormFields.dealer_name} label="Labour/Dealer Name" placeholder='5' type="text" fullWidth variant="standard"/>
+                    <TextField  margin="dense"  name='dealer_name'  disabled={disableCreateMaterialField} onChange={event => handleUpdateMaterialFormChange(event)} value={createMaterialFormFields.dealer_name} label="Labour/Dealer Name" placeholder='5' type="text" fullWidth variant="standard"
+                    InputLabelProps={{
+                      style: {
+                        color: "#21ad01", // Change this to your desired label color
+                        borderColor: "#21ad01",
+                      },
+                    }}
+                    InputProps={{
+                      style: {
+                        color: "black", // Change text color
+                        borderColor: "#f798a1",
+                      },
+                      focused: {
+                        borderColor: "#55766f", // Change focus border color
+                        color: "#55766f", // Change text color
+                        
+                      },
+                    }}
+                    />
                 </div>
             </div>
            
             <div className='row' style={{marginLeft:0}}>
                
                 <div className='col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12'>
-                <TextField  margin="dense"  name='price'  disabled={disableCreateMaterialField} onChange={event => handleUpdateMaterialFormChange(event)} value={createMaterialFormFields.price} label="Price" placeholder='5' type="number" fullWidth variant="standard"/>
+                <TextField  margin="dense"  name='price'  disabled={disableCreateMaterialField} onChange={event => handleUpdateMaterialFormChange(event)} value={createMaterialFormFields.price} label="Price" placeholder='5' type="number" fullWidth variant="standard"
+                InputLabelProps={{
+                  style: {
+                    color: "#21ad01", // Change this to your desired label color
+                    borderColor: "#21ad01",
+                  },
+                }}
+                InputProps={{
+                  style: {
+                    color: "black", // Change text color
+                    borderColor: "#f798a1",
+                  },
+                  focused: {
+                    borderColor: "#55766f", // Change focus border color
+                    color: "#55766f", // Change text color
+                    
+                  },
+                }}
+                />
              
                 </div>
                 <div className='col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12'>
                
-               <TextField  margin="dense"  name='date'  disabled={disableCreateMaterialField} onChange={event => handleUpdateMaterialFormChange(event)} value={createMaterialFormFields.date} label="Date" type="datetime-local" fullWidth variant="standard"/>
+               <TextField  margin="dense"  name='date'  disabled={disableCreateMaterialField} onChange={event => handleUpdateMaterialFormChange(event)} value={createMaterialFormFields.date} label="Date" type="datetime-local" fullWidth variant="standard"
+               InputLabelProps={{
+                style: {
+                  color: "#21ad01", // Change this to your desired label color
+                  borderColor: "#21ad01",
+                },
+              }}
+              InputProps={{
+                style: {
+                  color: "black", // Change text color
+                  borderColor: "#f798a1",
+                },
+                focused: {
+                  borderColor: "#55766f", // Change focus border color
+                  color: "#55766f", // Change text color
+                  
+                },
+              }}
+               />
            </div>
             </div>
             <div className='row' style={{marginLeft:0}}>
               
                 <div className='col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12'>
-                    <TextField size='small' select name='mop'  disabled={disableCreateMaterialField} onChange={event => handleUpdateMaterialFormChange(event)} value={createMaterialFormFields.mop}  placeholder='Done'  label="Mode Of Payment" fullWidth variant="standard"  >
+                    <TextField size='small' select name='mop'  disabled={disableCreateMaterialField} onChange={event => handleUpdateMaterialFormChange(event)} value={createMaterialFormFields.mop}  placeholder='Done'  label="Mode Of Payment" fullWidth variant="standard" 
+                    InputLabelProps={{
+                      style: {
+                        color: "#21ad01", // Change this to your desired label color
+                        borderColor: "#21ad01",
+                      },
+                    }}
+                    InputProps={{
+                      style: {
+                        color: "black", // Change text color
+                        borderColor: "#f798a1",
+                      },
+                      focused: {
+                        borderColor: "#55766f", // Change focus border color
+                        color: "#55766f", // Change text color
+                        
+                      },
+                    }}
+                    >
                                 <MenuItem value={"Cash"}>Cash</MenuItem>
                                 <MenuItem  value={"Phone-Pay"}>Phone Pay </MenuItem>
                                 <MenuItem  value={"PayTM"}>PayTM </MenuItem>
@@ -731,7 +989,25 @@ async function fetchMaterialDetailsByMaterialId(materialId){
                         </TextField>
                 </div>
                 <div className='col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12'>
-                <TextField  margin="dense"  name='receipt'  disabled={disableCreateMaterialField} onChange={event => handleUpdateMaterialFormChange(event)}  label="Receipt" type="file" fullWidth variant="standard"/>
+                <TextField  margin="dense"  name='receipt'  disabled={disableCreateMaterialField} onChange={event => handleUpdateMaterialFormChange(event)}  label="Receipt" type="file" fullWidth variant="standard"
+                InputLabelProps={{
+                  style: {
+                    color: "#21ad01", // Change this to your desired label color
+                    borderColor: "#21ad01",
+                  },
+                }}
+                InputProps={{
+                  style: {
+                    color: "black", // Change text color
+                    borderColor: "#f798a1",
+                  },
+                  focused: {
+                    borderColor: "#55766f", // Change focus border color
+                    color: "#55766f", // Change text color
+                    
+                  },
+                }}
+                />
              
                 </div>
             </div>
@@ -739,8 +1015,8 @@ async function fetchMaterialDetailsByMaterialId(materialId){
                
         </DialogContent>
         <DialogActions>
-          <Button onClick={()=>setMaterialUpdateDialogVisible(false)}>Cancel</Button>
-          <Button onClick={()=>{updateMaterial()}}>Update</Button>
+          <Button style={{color:'gray'}} onClick={()=>setMaterialUpdateDialogVisible(false)}>Cancel</Button>
+          <Button style={buttonStyle}  onClick={()=>{updateMaterial()}}>Update</Button>
         </DialogActions>
       </Dialog>
 
@@ -775,7 +1051,7 @@ export default Dashboard
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-      backgroundColor: '#0059BF',
+      backgroundColor: 'gray',
       color: theme.palette.common.white,
     },
     [`&.${tableCellClasses.body}`]: {

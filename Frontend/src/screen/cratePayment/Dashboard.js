@@ -1,4 +1,4 @@
-import { Accordion, AccordionDetails, AccordionSummary, AppBar, Button, Dialog, IconButton, List, ListItem, ListItemAvatar, ListItemText, MenuItem, Slide, TextField, Toolbar, Typography } from '@mui/material';
+import { Accordion, AccordionDetails, AccordionSummary, AppBar, Button, Dialog, DialogActions, IconButton, List, ListItem, ListItemAvatar, ListItemText, MenuItem, Slide, TextField, Toolbar, Typography } from '@mui/material';
 import React , {useState, useEffect}from 'react'
 import { Container, Card, ListGroup } from 'react-bootstrap'
 import { useNavigate, useParams } from 'react-router-dom';
@@ -105,21 +105,57 @@ function Dashboard() {
   return (
     <>
      {loaderVisible? <Loader/>:<></>}
-    <div className='row' style={{height:'auto', backgroundColor:'', borderRadius:5, border:'1px solid lightgray', padding:0, margin:0, padding:10, marginBottom:20, marginTop:10, paddingBottom:0}}>
+    <div className='row' style={{height:'auto', backgroundColor:'', borderRadius:5, border:'1px solid lightgray', padding:0, margin:0, padding:10, marginBottom:20, marginTop:0, paddingBottom:0}}>
             
             <p style={{fontWeight:700, color:'#5F5E5E', fontSize:15, marginTop:0, marginBottom:10}}>Create Payment :</p>
                 
             
                 <div className='row' style={{marginLeft:0}}>
                 <div className='col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12' style={{marginRight:0}}>
-                                    <TextField id="standard-select-currency" name='cust_id'  disabled={disableCreatePaymentField} onChange={event => (fetchCustomerSiteListDetails(event.target.value),handleCreateCustoemrFormChange(event))} value={createPaymentFormFields.cust_id} select label="Customer" defaultValue="" variant="standard"  fullWidth>      
+                                    <TextField id="standard-select-currency" name='cust_id'  disabled={disableCreatePaymentField} onChange={event => (fetchCustomerSiteListDetails(event.target.value),handleCreateCustoemrFormChange(event))} value={createPaymentFormFields.cust_id} select label="Customer" defaultValue="" variant="standard"  fullWidth
+                                    InputLabelProps={{
+                                        style: {
+                                          color: "#21ad01", // Change this to your desired label color
+                                          borderColor: "#21ad01",
+                                        },
+                                      }}
+                                      InputProps={{
+                                        style: {
+                                          color: "black", // Change text color
+                                          borderColor: "#f798a1",
+                                        },
+                                        focused: {
+                                          borderColor: "#55766f", // Change focus border color
+                                          color: "#55766f", // Change text color
+                                          
+                                        },
+                                      }}
+                                    >      
                                                 {customerList.map((customerDetails)=>(
                                                     <MenuItem value={customerDetails.cust_id} >{customerDetails.name}</MenuItem>   
                                                 ))}
                                     </TextField>
                                 </div>
                                 <div className='col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12' style={{marginRight:0, marginTop:0}}>
-                        <TextField id="standard-select-currency" name='site_id'  disabled={disableCreatePaymentField || siteFieldDisable} onChange={(event) =>handleCreateCustoemrFormChange(event)} value={createPaymentFormFields.site_id} select label="Site" defaultValue="" fullWidth variant="standard" >      
+                        <TextField id="standard-select-currency" name='site_id'  disabled={disableCreatePaymentField || siteFieldDisable} onChange={(event) =>handleCreateCustoemrFormChange(event)} value={createPaymentFormFields.site_id} select label="Site" defaultValue="" fullWidth variant="standard" 
+                        InputLabelProps={{
+                            style: {
+                              color: "#21ad01", // Change this to your desired label color
+                              borderColor: "#21ad01",
+                            },
+                          }}
+                          InputProps={{
+                            style: {
+                              color: "black", // Change text color
+                              borderColor: "#f798a1",
+                            },
+                            focused: {
+                              borderColor: "#55766f", // Change focus border color
+                              color: "#55766f", // Change text color
+                              
+                            },
+                          }}
+                        >      
                                     {siteList.map((siteDetails)=>(
                                         <MenuItem value={siteDetails.site_id} >{siteDetails.name}</MenuItem>   
                                     ))}
@@ -129,10 +165,45 @@ function Dashboard() {
                 </div>
                 <div className='row' style={{marginLeft:0}}>
                 <div className='col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12'>
-                        <TextField  margin="dense"  name='amount'  disabled={disableCreatePaymentField} onChange={event => handleCreateCustoemrFormChange(event)} value={createPaymentFormFields.amount} label="Amount" placeholder='120000.00' type="number" fullWidth variant="standard"/>
+                        <TextField  margin="dense"  name='amount'  disabled={disableCreatePaymentField} onChange={event => handleCreateCustoemrFormChange(event)} value={createPaymentFormFields.amount} label="Amount" placeholder='120000.00' type="number" fullWidth variant="standard"
+                        InputLabelProps={{
+                            style: {
+                              color: "#21ad01", // Change this to your desired label color
+                              borderColor: "#21ad01",
+                            },
+                          }}
+                          InputProps={{
+                            style: {
+                              color: "black", // Change text color
+                              borderColor: "#f798a1",
+                            },
+                            focused: {
+                              borderColor: "#55766f", // Change focus border color
+                              color: "#55766f", // Change text color
+                              
+                            },
+                          }}
+                        />
                     </div>
                     <div className='col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12' style={{marginTop:10}}>
-                    <TextField size='small' select name='action'  disabled={disableCreatePaymentField} onChange={event => handleCreateCustoemrFormChange(event)} value={createPaymentFormFields.action}  placeholder='Done'  label="Action" defaultValue="Credit" fullWidth variant="standard"  >
+                    <TextField size='small' select name='action'  disabled={disableCreatePaymentField} onChange={event => handleCreateCustoemrFormChange(event)} value={createPaymentFormFields.action}  placeholder='Done'  label="Action" defaultValue="Credit" fullWidth variant="standard" 
+                    InputLabelProps={{
+                        style: {
+                          color: "#21ad01", // Change this to your desired label color
+                          borderColor: "#21ad01",
+                        },
+                      }}
+                      InputProps={{
+                        style: {
+                          color: "black", // Change text color
+                          borderColor: "#f798a1",
+                        },
+                        focused: {
+                          borderColor: "#55766f", // Change focus border color
+                          color: "#55766f", // Change text color
+                          
+                        },
+                      }} >
                                 <MenuItem value={"Credit"}>Credit</MenuItem>
                                 <MenuItem  value={"Debit"}>Debit </MenuItem>
                         </TextField>
@@ -141,10 +212,46 @@ function Dashboard() {
 
                     <div className='row' style={{marginLeft:0}}>
                     <div hidden={createPaymentFormFields.action=="Credit"} className='col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12'>
-                        <TextField  margin="dense"  name='dealer_name'  disabled={disableCreatePaymentField} onChange={event => handleCreateCustoemrFormChange(event)} value={createPaymentFormFields.dealer_name} label="Dealer/Labour Name" placeholder='Mr John Cena' type="text" fullWidth variant="standard"/>
+                        <TextField  margin="dense"  name='dealer_name'  disabled={disableCreatePaymentField} onChange={event => handleCreateCustoemrFormChange(event)} value={createPaymentFormFields.dealer_name} label="Dealer/Labour Name" placeholder='Mr John Cena' type="text" fullWidth variant="standard"
+                        InputLabelProps={{
+                            style: {
+                              color: "#21ad01", // Change this to your desired label color
+                              borderColor: "#21ad01",
+                            },
+                          }}
+                          InputProps={{
+                            style: {
+                              color: "black", // Change text color
+                              borderColor: "#f798a1",
+                            },
+                            focused: {
+                              borderColor: "#55766f", // Change focus border color
+                              color: "#55766f", // Change text color
+                              
+                            },
+                          }}
+                        />
                     </div>
                     <div className='col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12' style={{marginTop:10}}>
-                    <TextField size='small' select name='mop'  disabled={disableCreatePaymentField} onChange={event => handleCreateCustoemrFormChange(event)} value={createPaymentFormFields.mop}  placeholder='Done'  label="Mode Of Payment" defaultValue="Cash" fullWidth variant="standard"  >
+                    <TextField size='small' select name='mop'  disabled={disableCreatePaymentField} onChange={event => handleCreateCustoemrFormChange(event)} value={createPaymentFormFields.mop}  placeholder='Done'  label="Mode Of Payment" defaultValue="Cash" fullWidth variant="standard" 
+                    InputLabelProps={{
+                        style: {
+                          color: "#21ad01", // Change this to your desired label color
+                          borderColor: "#21ad01",
+                        },
+                      }}
+                      InputProps={{
+                        style: {
+                          color: "black", // Change text color
+                          borderColor: "#f798a1",
+                        },
+                        focused: {
+                          borderColor: "#55766f", // Change focus border color
+                          color: "#55766f", // Change text color
+                          
+                        },
+                      }}
+                    >
                                 <MenuItem value={"Cash"}>Cash</MenuItem>
                                 <MenuItem  value={"Phone Pay"}>Phone Pay </MenuItem>
                                 <MenuItem  value={"PayTM"}>PayTM </MenuItem>
@@ -158,19 +265,69 @@ function Dashboard() {
                 
                 <div className='row' style={{marginLeft:0}}>
                     <div className='col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12' style={{marginTop:0}}>
-                        <TextField  margin="dense"  name='date'  disabled={disableCreatePaymentField} onChange={event => handleCreateCustoemrFormChange(event)} value={createPaymentFormFields.date} label="Date" type="datetime-local" fullWidth variant="standard"/>
+                        <TextField  margin="dense"  name='date'  disabled={disableCreatePaymentField} onChange={event => handleCreateCustoemrFormChange(event)} value={createPaymentFormFields.date} label="Date" type="datetime-local" fullWidth variant="standard"
+                        InputLabelProps={{
+                            style: {
+                              color: "#21ad01", // Change this to your desired label color
+                              borderColor: "#21ad01",
+                            },
+                          }}
+                          InputProps={{
+                            style: {
+                              color: "black", // Change text color
+                              borderColor: "#f798a1",
+                            },
+                            focused: {
+                              borderColor: "#55766f", // Change focus border color
+                              color: "#55766f", // Change text color
+                              
+                            },
+                          }}
+                        />
                     </div>
                     <div className='col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12'>
-                        <TextField  margin="dense"  name='remark'  disabled={disableCreatePaymentField} onChange={event => handleCreateCustoemrFormChange(event)} value={createPaymentFormFields.remark} label="Remark" multiline row={2} type="text" fullWidth variant="standard"/>
+                        <TextField  margin="dense"  name='remark'  disabled={disableCreatePaymentField} onChange={event => handleCreateCustoemrFormChange(event)} value={createPaymentFormFields.remark} label="Remark" row={2} type="text" fullWidth variant="standard"
+                        InputLabelProps={{
+                            style: {
+                              color: "#21ad01", // Change this to your desired label color
+                              borderColor: "#21ad01",
+                            },
+                          }}
+                          InputProps={{
+                            style: {
+                              color: "black", // Change text color
+                              borderColor: "#f798a1",
+                            },
+                            focused: {
+                              borderColor: "#55766f", // Change focus border color
+                              color: "#55766f", // Change text color
+                              
+                            },
+                          }}/>
                     </div>
                     
                 </div>
                 
-                <div className="row" style={{display:'flex', justifyContent:'flex-end', marginRight:0, marginTop:20, marginBottom:20}}>
+                {/* <div className="row" style={{display:'flex', justifyContent:'flex-end', marginRight:0, marginTop:20, marginBottom:20}}>
                 <Button onClick={()=>navigate('/home')} disabled={disableCreatePaymentField}  style={{backgroundColor:'#5F5E5E', height:30, width:90, textAlign:'center', marginRight:20, padding:0, fontSize:12, fontWeight:600, borderRadius:3, boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.25)', border:'0px', color:'white'}}>Cancel</Button>
-                <Button variant='contained' color='primary' onClick={()=>{createPayment()} } style={{backgroundColor:'', height:30, width:90, textAlign:'center', marginRight:0, padding:0, fontSize:12, fontWeight:600, borderRadius:3, boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.25)', border:'0px', color:'white'}} disabled={disableCreatePaymentField || createPaymentFormFields.cust_id=="" || createPaymentFormFields.amount=="" || createPaymentFormFields.action=="" || createPaymentFormFields.date=="" || createPaymentFormFields.mop==""  }>Create</Button>
+                <Button variant='contained' color='primary' onClick={()=>{createPayment()} } style={{backgroundColor:'', height:30, width:90, textAlign:'center', marginRight:0, padding:0, fontSize:12, fontWeight:600, borderRadius:3, boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.25)', border:'0px', color:'white'}} 
+                disabled={disableCreatePaymentField || createPaymentFormFields.cust_id=="" || createPaymentFormFields.amount=="" || createPaymentFormFields.action=="" || createPaymentFormFields.date=="" || createPaymentFormFields.mop==""  }>Create</Button>
                                    
-                </div>  
+                </div>   */}
+
+                <DialogActions style={{marginTop:50}}>
+                <Button style={{color:'gray'}} 
+                onClick={()=>navigate('/home')}
+                >Cancel</Button>
+
+                <Button style={{
+                    color:'white',
+                    backgroundColor:(disableCreatePaymentField || createPaymentFormFields.cust_id=="" || createPaymentFormFields.amount=="" || createPaymentFormFields.action=="" || createPaymentFormFields.date=="" || createPaymentFormFields.mop=="" )? 'lightgray': '#21ad01'
+                }} 
+                onClick={()=>{createPayment()} }
+                disabled={disableCreatePaymentField || createPaymentFormFields.cust_id=="" || createPaymentFormFields.amount=="" || createPaymentFormFields.action=="" || createPaymentFormFields.date=="" || createPaymentFormFields.mop==""}
+                >Create</Button>
+        </DialogActions>
           
     </div>
           

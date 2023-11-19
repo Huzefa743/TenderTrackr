@@ -68,6 +68,10 @@ app.use(bodyParser.json());
 //middleware to access routes.
 app.use("/api/v1", routes);
 
+app.use('/*', function(req,res) {
+  
+  res.sendFile(path.join(__dirname, 'build',  'index.html'));
+});
 
 const port= process.env.PORT || 8080;
 console.log("Server started on this port: "+port)

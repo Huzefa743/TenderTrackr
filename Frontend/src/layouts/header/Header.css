@@ -1,5 +1,110 @@
-@media screen and (max-width: 575px) {
-    .container-fluid{
-          margin-top: -10px;
+
+
+  /* ----------------------user profile css will stop here----------------- */
+  
+
+
+
+  .logo-image{
+     
+      height: 55px;
+      width: 200px;
+      margin-left: 0px;
+
     }
+  .dashboard-container{
+    background-color: white;
+    margin:0px;
+    padding: 0px;
+    padding: 30px !important;
   }
+
+  .history-heading{
+    font-size: medium;
+  }
+    
+  /* -------------------------media query-------------- */
+      /* Media queries for different screen sizes */
+      @media (max-width: 576px) {
+         
+            .container-fluid{
+                  margin-top: -10px;
+            }
+
+            .logo-image{
+     
+                  height: 40px;
+                  width: 140px;
+                  margin-left: 0px;
+            
+
+                }
+
+                .dashboard-container{
+                  background-color: white;
+                  margin:0px;
+                  padding: 0px;
+                  padding: 10px !important;
+                }
+                .history-heading{
+                  font-size: small;
+                }
+        
+        }
+  
+        @media (min-width: 577px) and (max-width: 768px) {
+          .sale-container{
+              height: auto;
+              background-color: white;
+              border-radius: 5px;
+              padding: 10px;
+              margin:0;
+              margin-bottom: 20px;
+              margin-top: 10px;
+            }
+
+            .dashboard-container{
+              background-color: white;
+              margin:0px;
+              padding: 0px;
+              padding: 10px !important;
+            }
+            .history-heading{
+              font-size: medium !important;
+            }
+         
+        }
+  
+        @media (min-width: 769px) and (max-width: 992px) {
+          /* Tablets and small laptops */
+          .dashboard-container{
+            background-color: white;
+            margin:0px;
+            padding: 0px;
+            padding: 20px !important;
+          }
+         
+        }
+  
+        @media (min-width: 993px) and (max-width: 1200px) {
+          /* Larger laptops and desktops */
+         
+        }
+  
+        @media (min-width: 1201px) and (max-width: 1440px) {
+          /* Wider screens */
+          
+        }
+  
+        @media (min-width: 1441px) {
+          /* 4K and larger screens */
+          
+        }
+
+
+
+
+
+
+
+

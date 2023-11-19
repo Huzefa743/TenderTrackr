@@ -1,4 +1,4 @@
-import { Accordion, AccordionDetails, AccordionSummary, AppBar, Button, Dialog, IconButton, List, ListItem, ListItemAvatar, ListItemText, Slide, TextField, Toolbar, Typography } from '@mui/material';
+import { Accordion, AccordionDetails, AccordionSummary, AppBar, Button, Dialog, DialogActions, IconButton, List, ListItem, ListItemAvatar, ListItemText, Slide, TextField, Toolbar, Typography } from '@mui/material';
 import React , {useState, useEffect}from 'react'
 import { Container, Card, ListGroup } from 'react-bootstrap'
 import { useNavigate, useParams } from 'react-router-dom';
@@ -82,6 +82,10 @@ function Dashboard() {
   })
  }
 
+ const buttonStyle = {
+    backgroundColor: '#21ad01', // Your desired background color
+    color: 'white', // Text color (optional, adjust as needed)
+  };
 
     useEffect(() => {
        // fetchCustomerDetails()
@@ -91,37 +95,143 @@ function Dashboard() {
   return (
     <>
      {loaderVisible? <Loader/>:<></>}
-    <div className='row' style={{height:'auto', backgroundColor:'', borderRadius:5, border:'1px solid lightgray', padding:0, margin:0, padding:10, marginBottom:20, marginTop:10, paddingBottom:0}}>
+    <div className='row' style={{height:'auto', backgroundColor:'', borderRadius:5, border:'1px solid lightgray', padding:0, margin:0, padding:10, marginBottom:20, marginTop:0, paddingBottom:0}}>
             
             <p style={{fontWeight:700, color:'#5F5E5E', fontSize:15, marginTop:0, marginBottom:0}}>Create Client :</p>
                 
             
                 <div className='row' style={{marginLeft:0}}>
                     <div className='col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12'>
-                        <TextField  margin="dense"  name='name'  disabled={disableCreateCustomerField} onChange={event => handleCreateCustoemrFormChange(event)} value={createCustomerFormFields.name} label="Client Name" placeholder='John Parker' type="text" fullWidth variant="standard"/>
+                        <TextField  margin="dense"  name='name'  disabled={disableCreateCustomerField} onChange={event => handleCreateCustoemrFormChange(event)} value={createCustomerFormFields.name} label="Client Name" placeholder='John Parker' type="text" fullWidth variant="standard"
+                              InputLabelProps={{
+                                style: {
+                                  color: "#21ad01", // Change this to your desired label color
+                                  borderColor: "#21ad01",
+                                },
+                              }}
+                              InputProps={{
+                                style: {
+                                  color: "black", // Change text color
+                                  borderColor: "#f798a1",
+                                },
+                                focused: {
+                                  borderColor: "#55766f", // Change focus border color
+                                  color: "#55766f", // Change text color
+                                  
+                                },
+                              }}
+                        />
                     </div>
                     <div className='col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12'>
-                        <TextField  margin="dense"  name='mobile'  disabled={disableCreateCustomerField} onChange={event => handleCreateCustoemrFormChange(event)} value={createCustomerFormFields.mobile} label="Mobile" placeholder='8819990000' type="number" fullWidth variant="standard"/>
+                        <TextField  margin="dense"  name='mobile'  disabled={disableCreateCustomerField} onChange={event => handleCreateCustoemrFormChange(event)} value={createCustomerFormFields.mobile} label="Mobile" placeholder='8819990000' type="number" fullWidth variant="standard"
+                          InputLabelProps={{
+                            style: {
+                              color: "#21ad01", // Change this to your desired label color
+                              borderColor: "#21ad01",
+                            },
+                          }}
+                          InputProps={{
+                            style: {
+                              color: "black", // Change text color
+                              borderColor: "#f798a1",
+                            },
+                            focused: {
+                              borderColor: "#55766f", // Change focus border color
+                              color: "#55766f", // Change text color
+                              
+                            },
+                          }}
+                        />
                     </div>
                 </div>
                 <div className='row' style={{marginLeft:0}}>
                     <div className='col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12'>
-                        <TextField  margin="dense"  name='email'  disabled={disableCreateCustomerField} onChange={event => handleCreateCustoemrFormChange(event)} value={createCustomerFormFields.email} label="Email" placeholder='johnparker@xxxx.xxx' type="email" fullWidth variant="standard"/>
+                        <TextField  margin="dense"  name='email'  disabled={disableCreateCustomerField} onChange={event => handleCreateCustoemrFormChange(event)} value={createCustomerFormFields.email} label="Email" placeholder='johnparker@xxxx.xxx' type="email" fullWidth variant="standard"
+                          InputLabelProps={{
+                            style: {
+                              color: "#21ad01", // Change this to your desired label color
+                              borderColor: "#21ad01",
+                            },
+                          }}
+                          InputProps={{
+                            style: {
+                              color: "black", // Change text color
+                              borderColor: "#f798a1",
+                            },
+                            focused: {
+                              borderColor: "#55766f", // Change focus border color
+                              color: "#55766f", // Change text color
+                              
+                            },
+                          }}
+                        />
                     </div>
                     <div className='col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12'>
-                        <TextField  margin="dense"  name='address'  disabled={disableCreateCustomerField} onChange={event => handleCreateCustoemrFormChange(event)} value={createCustomerFormFields.address} label="Address" placeholder='27/2, Sector-5 New Road, Bhopal-462010' type="text" fullWidth variant="standard"/>
+                        <TextField  margin="dense"  name='address'  disabled={disableCreateCustomerField} onChange={event => handleCreateCustoemrFormChange(event)} value={createCustomerFormFields.address} label="Address" placeholder='27/2, Sector-5 New Road, Bhopal-462010' type="text" fullWidth variant="standard"
+                        
+                        InputLabelProps={{
+                            style: {
+                              color: "#21ad01", // Change this to your desired label color
+                              borderColor: "#21ad01",
+                            },
+                          }}
+                          InputProps={{
+                            style: {
+                              color: "black", // Change text color
+                              borderColor: "#f798a1",
+                            },
+                            focused: {
+                              borderColor: "#55766f", // Change focus border color
+                              color: "#55766f", // Change text color
+                              
+                            },
+                          }}/>
                     </div>
                 </div>
                 <div className='row' style={{marginLeft:0}}>
                     <div className='col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12'>
-                        <TextField  margin="dense"  name='gst'  disabled={disableCreateCustomerField} onChange={event => handleCreateCustoemrFormChange(event)} value={createCustomerFormFields.gst} label="GST" placeholder='12345-PPNM-9876' type="text" fullWidth variant="standard"/>
+                        <TextField  margin="dense"  name='gst'  disabled={disableCreateCustomerField} onChange={event => handleCreateCustoemrFormChange(event)} value={createCustomerFormFields.gst} label="GST" placeholder='12345-PPNM-9876' type="text" fullWidth variant="standard"
+                          InputLabelProps={{
+                            style: {
+                              color: "#21ad01", // Change this to your desired label color
+                              borderColor: "#21ad01",
+                            },
+                          }}
+                          InputProps={{
+                            style: {
+                              color: "black", // Change text color
+                              borderColor: "#f798a1",
+                            },
+                            focused: {
+                              borderColor: "#55766f", // Change focus border color
+                              color: "#55766f", // Change text color
+                              
+                            },
+                          }}/>
                     </div>
                     
                 </div>
                 <div className="row" style={{display:'flex', justifyContent:'flex-end', marginRight:0, marginTop:20, marginBottom:20}}>
-                <Button onClick={()=>navigate('/home')} disabled={disableCreateCustomerField}  style={{backgroundColor:'#5F5E5E', height:30, width:90, textAlign:'center', marginRight:20, padding:0, fontSize:12, fontWeight:600, borderRadius:3, boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.25)', border:'0px', color:'white'}}>Cancel</Button>
-                <Button variant='contained' color='primary' onClick={()=>{createCustomer()} } style={{backgroundColor:'', height:30, width:90, textAlign:'center', marginRight:0, padding:0, fontSize:12, fontWeight:600, borderRadius:3, boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.25)', border:'0px', color:'white'}} disabled={disableCreateCustomerField || createCustomerFormFields.name==""  }>Create</Button>
-                                   
+                {/* <Button onClick={()=>navigate('/home')} disabled={disableCreateCustomerField}  style={{backgroundColor:'#5F5E5E', height:30, width:90, textAlign:'center', marginRight:20, padding:0, fontSize:12, fontWeight:600, borderRadius:3, boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.25)', border:'0px', color:'white'}}>Cancel</Button>
+                <Button variant='contained'  onClick={()=>{createCustomer()} } style={{
+                    backgroundColor:(disableCreateCustomerField || createCustomerFormFields.name=="" || createCustomerFormFields.mobile=="" || createCustomerFormFields.email=="" || createCustomerFormFields.address=="" )? '': '#21ad01', height:30, width:90, textAlign:'center', marginRight:0, padding:0, fontSize:12, fontWeight:600, borderRadius:3, boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.25)', border:'0px', color:'white'}} disabled={disableCreateCustomerField || createCustomerFormFields.name=="" || createCustomerFormFields.mobile=="" || createCustomerFormFields.email=="" || createCustomerFormFields.address=="" 
+                     }>Create</Button> */}
+                 
+          <DialogActions style={{marginTop:50}}>
+                <Button style={{color:'gray'}} 
+                onClick={()=>navigate('/home')}
+                >Cancel</Button>
+
+                <Button style={{
+                    color:'white',
+                    backgroundColor:(disableCreateCustomerField || createCustomerFormFields.name=="" || createCustomerFormFields.mobile=="" || createCustomerFormFields.email=="" || createCustomerFormFields.address=="" )? 'lightgray': '#21ad01'
+                }} 
+                onClick={()=>{createCustomer()} }
+                disabled={disableCreateCustomerField || createCustomerFormFields.name=="" || createCustomerFormFields.mobile=="" || createCustomerFormFields.email=="" || createCustomerFormFields.address=="" }
+                >Create</Button>
+        </DialogActions>
+                
+                          
                 </div>  
           
     </div>

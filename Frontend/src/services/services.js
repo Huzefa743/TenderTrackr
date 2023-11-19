@@ -1,9 +1,9 @@
 import axios from "axios";
 
-//const baseURL = "https://craftshome.up.railway.app/api/v1/"
+//const baseURL = "http://localhost:8080/api/v1/"
 const base = "http://mimicker.thbscoetg.com"
-//const baseURL = "https://craftshome.up.railway.app/api/v1/"
-const baseURL = "https://craftshome.up.railway.app/api/v1/"
+//const baseURL = "http://localhost:8080/api/v1/"
+const baseURL = "http://localhost:8080/api/v1/"
 
 
 // Login User - POST

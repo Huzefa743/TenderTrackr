@@ -25,13 +25,13 @@ router.get('/', function(req,res) {
 router.post('/register', imageController.uploadImage.single('userAvatar'), authController.register)
 router.post('/login',  authController.sign_in)
 router.get('/user-avatar/:id', authController.getUseravatarImage)
-router.post('/reset-password', verifyUser,  authController.resetPassword)
+router.post('/reset-password',  authController.resetPassword)
 router.post('/pr/users/login', authController.login)
 router.post('/pr/users/signup',verifyUser,  authController.signup)
 
 router.delete('/delete-user/:userId',verifyUser, authController.deleteUser)
 router.get('/get-user/:userId',verifyUser, authController.getUserById)
-router.get('/get-all-user',verifyUser, authController.getAllUser)
+router.get('/get-all-user', authController.getAllUser)
 
 //customer routes
 router.post('/create-customer',verifyUser,  customerController.createCustomer)

@@ -1,4 +1,4 @@
-import { Accordion, AccordionDetails, AccordionSummary, AppBar, Button, Dialog, IconButton, List, ListItem, ListItemAvatar, ListItemText, MenuItem, Slide, TextField, Toolbar, Typography } from '@mui/material';
+import { Accordion, AccordionDetails, AccordionSummary, AppBar, Button, Dialog, DialogActions, IconButton, List, ListItem, ListItemAvatar, ListItemText, MenuItem, Slide, TextField, Toolbar, Typography } from '@mui/material';
 import React , {useState, useEffect}from 'react'
 import { Container, Card, ListGroup } from 'react-bootstrap'
 import { useNavigate, useParams } from 'react-router-dom';
@@ -78,35 +78,103 @@ function Dashboard() {
   return (
     <>
      {loaderVisible? <Loader/>:<></>}
-    <div className='row' style={{height:'auto', backgroundColor:'', borderRadius:5, border:'1px solid lightgray', padding:0, margin:0, padding:10, marginBottom:20, marginTop:10, paddingBottom:0}}>
+    <div className='row' style={{height:'auto', backgroundColor:'', borderRadius:5, border:'1px solid lightgray', padding:0, margin:0, padding:10, marginBottom:20, marginTop:0, paddingBottom:0}}>
             
             <p style={{fontWeight:700, color:'#5F5E5E', fontSize:15, marginTop:0, marginBottom:10}}>Create Site :</p>
                 
             
                 <div className='row' style={{marginLeft:0}}>
                 <div className='col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12' style={{marginRight:0, marginTop:10}}>
-                                    <TextField id="standard-select-currency" name='ttglEnqRefNo'  disabled={disableCreateSiteField} onChange={(event) => setCustomerId(event.target.value)} value={customerId} select label="Customer" defaultValue="" variant="standard" fullWidth>      
+                                    <TextField id="standard-select-currency" name='ttglEnqRefNo'  disabled={disableCreateSiteField} onChange={(event) => setCustomerId(event.target.value)} value={customerId} select label="Customer" defaultValue="" variant="standard" fullWidth
+                                      InputLabelProps={{
+                                        style: {
+                                          color: "#21ad01", // Change this to your desired label color
+                                          borderColor: "#21ad01",
+                                        },
+                                      }}
+                                      InputProps={{
+                                        style: {
+                                          color: "black", // Change text color
+                                          borderColor: "#f798a1",
+                                        },
+                                        focused: {
+                                          borderColor: "#55766f", // Change focus border color
+                                          color: "#55766f", // Change text color
+                                          
+                                        },
+                                      }}
+                                    >      
                                                 {customerList.map((customerDetails)=>(
                                                     <MenuItem value={customerDetails.cust_id} >{customerDetails.name}</MenuItem>   
                                                 ))}
                                     </TextField>
                                 </div>
                     <div className='col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12' style={{marginTop:0}}>
-                        <TextField  margin="dense"  name='name'  disabled={disableCreateSiteField} onChange={event => handleCreateCustoemrFormChange(event)} value={createSiteFormFields.name} label="Site Name" placeholder='Shymla Hills' type="text" fullWidth variant="standard"/>
+                        <TextField  margin="dense"  name='name'  disabled={disableCreateSiteField} onChange={event => handleCreateCustoemrFormChange(event)} value={createSiteFormFields.name} label="Site Name" placeholder='Shymla Hills' type="text" fullWidth variant="standard"
+                          InputLabelProps={{
+                            style: {
+                              color: "#21ad01", // Change this to your desired label color
+                              borderColor: "#21ad01",
+                            },
+                          }}
+                          InputProps={{
+                            style: {
+                              color: "black", // Change text color
+                              borderColor: "#f798a1",
+                            },
+                            focused: {
+                              borderColor: "#55766f", // Change focus border color
+                              color: "#55766f", // Change text color
+                              
+                            },
+                          }}
+                        />
                     </div>
                 </div>
                 <div className='row' style={{marginLeft:0}}>
                     <div className='col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12'>
-                        <TextField  margin="dense"  name='address'  disabled={disableCreateSiteField} onChange={event => handleCreateCustoemrFormChange(event)} value={createSiteFormFields.address} label="Address" placeholder='H-5002, area-69 Shymla Hills Bhopla-462010' type="text" fullWidth variant="standard"/>
+                        <TextField  margin="dense"  name='address'  disabled={disableCreateSiteField} onChange={event => handleCreateCustoemrFormChange(event)} value={createSiteFormFields.address} label="Address" placeholder='H-5002, area-69 Shymla Hills Bhopla-462010' type="text" fullWidth variant="standard"
+                          InputLabelProps={{
+                            style: {
+                              color: "#21ad01", // Change this to your desired label color
+                              borderColor: "#21ad01",
+                            },
+                          }}
+                          InputProps={{
+                            style: {
+                              color: "black", // Change text color
+                              borderColor: "#f798a1",
+                            },
+                            focused: {
+                              borderColor: "#55766f", // Change focus border color
+                              color: "#55766f", // Change text color
+                              
+                            },
+                          }}
+                        />
                     </div>
                     
                 </div>
                 
-                <div className="row" style={{display:'flex', justifyContent:'flex-end', marginRight:0, marginTop:20, marginBottom:20}}>
+                {/* <div className="row" style={{display:'flex', justifyContent:'flex-end', marginRight:0, marginTop:20, marginBottom:20}}>
                 <Button onClick={()=>navigate('/home')} disabled={disableCreateSiteField}  style={{backgroundColor:'#5F5E5E', height:30, width:90, textAlign:'center', marginRight:20, padding:0, fontSize:12, fontWeight:600, borderRadius:3, boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.25)', border:'0px', color:'white'}}>Cancel</Button>
                 <Button variant='contained' color='primary' onClick={()=>{createSite()} } style={{backgroundColor:'', height:30, width:90, textAlign:'center', marginRight:0, padding:0, fontSize:12, fontWeight:600, borderRadius:3, boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.25)', border:'0px', color:'white'}} disabled={disableCreateSiteField || createSiteFormFields.name=="" || createSiteFormFields.address==""  }>Create</Button>
                                    
-                </div>  
+                </div>   */}
+
+                <DialogActions style={{marginTop:50}}>
+                <Button style={{color:'gray'}} 
+                onClick={()=>navigate('/home')}
+                >Cancel</Button>
+
+                <Button style={{
+                    color:'white',
+                    backgroundColor:(disableCreateSiteField || createSiteFormFields.name=="" || createSiteFormFields.address=="" )? 'lightgray': '#21ad01'
+                }} 
+                onClick={()=>{createSite()} }
+                disabled={disableCreateSiteField || createSiteFormFields.name=="" || createSiteFormFields.address=="" }
+                >Create</Button>
+        </DialogActions>
           
     </div>
           
