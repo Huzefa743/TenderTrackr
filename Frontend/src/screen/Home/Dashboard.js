@@ -1,5 +1,5 @@
-import { Accordion, AccordionDetails, AccordionSummary, AppBar, Button, Chip, Dialog, Divider, IconButton, List, ListItem, ListItemAvatar, ListItemText, Paper, Slide, styled, Table, TableBody, TableCell, tableCellClasses, TableContainer, TableHead, TableRow, TextField, Toolbar, Typography } from '@mui/material';
-import React , {useState, useEffect}from 'react'
+import { Accordion, AccordionDetails, AccordionSummary, AppBar, Button, Chip, CircularProgress, Dialog, Divider, IconButton, List, ListItem, ListItemAvatar, ListItemText, Pagination, Paper, Slide, Stack, styled, Table, TableBody, TableCell, tableCellClasses, TableContainer, TableHead, TableRow, TextField, Toolbar, Typography } from '@mui/material';
+import React , {useState, useEffect, useTransition}from 'react'
 import { Container, Card, ListGroup } from 'react-bootstrap'
 import { useNavigate, useParams } from 'react-router-dom';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -33,25 +33,55 @@ function Dashboard() {
     const [debitPaymentList, setDebitPaymentList] = useState([])
     const [totalCredit, setTotalCredit] = useState()
     const [totalDebit, setTotalDebit] = useState()
+    const [paymentDetailsLoader, setPaymentDetailsLoader] = useState(false)
 
     async function fetchCustomerDetails(){
+      setPaymentDetailsLoader(true)
         API.getAllPaymentDetails().then((res) => {
           setCustomerTotalCreditPayment(res.data.totalCreditPayment)
           setCustomerTotalDebitPayment(res.data.totalDebitPayment)
           setCustomerTotalBalancePayment(res.data.totalBalancePayment)
+          setPaymentDetailsLoader(false)
         });
     }
-    async function fetchAllCreditPayment(){
-      API.getAllCreditPaymentDetails().then((res) => {
+
+    const[creditPaymentLoader, setCreditPaymentLoader] = useState(false)
+    const[creditPage, setCreditPage] = useState(1)
+    const[totalCreditCount, setTotalCreditCount] = useState(1)
+    const creditPaginationHandle = async (event, value) => {
+      console.log("vlaue in handl change for pagination", value)
+      setCreditPaymentLoader(true)
+      setCreditPage(value)
+      await fetchAllCreditPayment(value)
+      setCreditPaymentLoader(false)
+  };
+    async function fetchAllCreditPayment(page){
+      setCreditPaymentLoader(true)
+      API.getAllCreditPaymentDetails(page).then((res) => {
         setCreditPaymentList(res.data.data)
         setTotalCredit(res.data.totalCreditPayment)
-        
+        setTotalCreditCount(res?.data?.totalEntries)
+        setCreditPaymentLoader(false)
       });
   }
-  async function fetchAllDebitPayment(){
-    API.getAllDebitPaymentDetails().then((res) => {
+
+  const[debitPaymentLoader, setDebitPaymentLoader] = useState(false)
+  const[debitPage, setDebitPage] = useState(1)
+  const[totalDebitCount, setTotalDebitCount] = useState(1)
+  const debitPaginationHandle = async (event, value) => {
+    console.log("vlaue in handl change for pagination", value)
+    setDebitPaymentLoader(true)
+    setDebitPage(value)
+    await fetchAllDebitPayment(value)
+    setDebitPaymentLoader(false)
+};
+  async function fetchAllDebitPayment(page){
+    setDebitPaymentLoader(true)
+    API.getAllDebitPaymentDetails(page).then((res) => {
       setDebitPaymentList(res.data.data)
       setTotalDebit(res.data.totalDebitPayment)
+      setTotalDebitCount(res?.data?.totalEntries)
+      setDebitPaymentLoader(false)
       
     });
 }
@@ -59,8 +89,8 @@ function Dashboard() {
 
     useEffect(() => {
         fetchCustomerDetails()
-        fetchAllCreditPayment()
-        fetchAllDebitPayment()
+        fetchAllCreditPayment(creditPage)
+        fetchAllDebitPayment(debitPage)
 
       
         }, []);
@@ -84,7 +114,7 @@ function Dashboard() {
         <TrendingDownIcon color='warning' />
       </IconButton>
       <p style={{ padding: 0, margin: 0, display: 'inline-block', color: '#FF8C00', fontSize: 12, fontWeight: 600 }}>
-        <span className="history-heading">{customerTotalCreditPayment}</span>
+        <span className="history-heading">{paymentDetailsLoader?<CircularProgress size={25} style={{color:'#FF8C00'}}/> : customerTotalCreditPayment}</span>
       </p>
     </div>
   </div>
@@ -97,7 +127,7 @@ function Dashboard() {
         <TrendingUpIcon color='error' />
       </IconButton>
       <p style={{ padding: 0, margin: 0, display: 'inline-block', color: '#d32f2f', fontSize: 12, fontWeight: 600 }}>
-        <span className="history-heading">{customerTotalDebitPayment}</span>
+        <span className="history-heading">{paymentDetailsLoader?<CircularProgress size={25} style={{color:'#d32f2f'}}/> :customerTotalDebitPayment}</span>
       </p>
     </div>
   </div>
@@ -113,7 +143,7 @@ function Dashboard() {
     <AccountBalanceWalletIcon color='success' fontSize='500px' />
   </IconButton>
   <p style={{ padding: 0, margin: 0, display: 'inline-block', color: 'green', fontSize: 12, fontWeight: 600 }}>
-    <span className="history-heading" style={{color:'darkgreen'}}>{customerTotalBalancePayment}</span>
+    <span className="history-heading" style={{color:'darkgreen'}}>{paymentDetailsLoader?<CircularProgress size={25} style={{color:'green'}}/> :customerTotalBalancePayment}</span>
   </p>
 </div>
               </div>
@@ -138,13 +168,13 @@ function Dashboard() {
             <Typography >
                 <div className='row' style={{padding:5, margin:0, marginTop:10}}> 
                       <div className='col-10'>
-                      <p style={{textAlign:'left'}} className="history-heading">Total Credit Payment: {totalCredit}</p>
+                      <p style={{textAlign:'left'}} className="history-heading">Total Credit Payment: {creditPaymentLoader?<CircularProgress size={15} style={{color:'lightgray'}}/> :totalCredit}</p>
                       </div>
                      
                       <div className='col-2' style={{textAlign:'right'}}>
                         {console.log("here is the payment list", creditPaymentList.length)}
                       <IconButton disabled={creditPaymentList.length==0} aria-label="delete" style={{marginTop:-7}} onClick={()=>{window.location.href = `https://tendertrackr.up.railway.app/api/v1/download-income-details`}}>
-                      <SimCardDownloadIcon color={creditPaymentList.length==0 ? 'disabled':'success'}/>
+                      {creditPaymentLoader?<CircularProgress size={15} style={{color:'green'}}/> :<SimCardDownloadIcon color={creditPaymentList.length==0 ? 'disabled':'success'}/>}
                     </IconButton>
                     
                       </div>
@@ -166,8 +196,12 @@ function Dashboard() {
                     <StyledTableCell ><span className="history-heading">Amount</span></StyledTableCell>
                   </TableRow>
                 </TableHead>
+                {creditPaymentLoader?
+                <div style={{  display: 'flex', justifyContent: 'center', alignItems: 'center', height:'100px', width:'100%', marginLeft:'50%' }}>
+                <CircularProgress size={25} style={{color:'gray',}}/></div> :
                 <TableBody>
                   {creditPaymentList.map((paymentDetails, index) => (
+                    
                     <StyledTableRow >
                       <StyledTableCell component="th" scope="row">
                       <span className="history-heading">{index+1}</span>
@@ -185,8 +219,13 @@ function Dashboard() {
                     </StyledTableRow>
                   ))}
                 </TableBody>
+}
               </Table>
             </TableContainer>
+            <div className='row' style={{margin:20, marginBottom:70, backgroundColor:'', float:'center', marginRight:0}}>
+<Stack spacing={0} style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
+  <Pagination count={Math.ceil(totalCreditCount / 5)} page={creditPage} onChange={creditPaginationHandle}  />
+</Stack>  </div>
             </Typography>
             </AccordionDetails>
         </Accordion>
@@ -203,12 +242,13 @@ function Dashboard() {
             <Typography >
             <div className='row' style={{padding:5, margin:0, marginTop:10}}> 
                       <div className='col-10'>
-                      <p style={{textAlign:'left'}}> <span className="history-heading">Total Credit Payment: {totalDebit}</span></p>
+                      <p style={{textAlign:'left'}}> <span className="history-heading">Total Credit Payment: {debitPaymentLoader?<CircularProgress size={15} style={{color:'gray'}}/> : totalDebit}</span></p>
                       </div>
                      
                       <div className='col-2' style={{textAlign:'right'}}>
                       <IconButton disabled={debitPaymentList.length==0} aria-label="delete" style={{marginTop:-7}} onClick={()=>{window.location.href = `https://tendertrackr.up.railway.app/api/v1/download-expense-details`}}>
-                      <SimCardDownloadIcon color={debitPaymentList.length==0 ? 'disabled':'success'}/>
+                      {debitPaymentLoader?<CircularProgress size={15} style={{color:'green'}}/> :
+                      <SimCardDownloadIcon color={debitPaymentList.length==0 ? 'disabled':'success'}/>}
                     </IconButton>
                     
                       </div>
@@ -233,6 +273,9 @@ function Dashboard() {
                     <StyledTableCell> <span className="history-heading">Amount</span></StyledTableCell>
                   </TableRow>
                 </TableHead>
+                {debitPaymentLoader?
+                <div style={{  display: 'flex', justifyContent: 'center', alignItems: 'center', height:'100px', width:'100%', marginLeft:'50%' }}>
+                <CircularProgress size={25} style={{color:'gray',}}/></div>:
                 <TableBody>
                   {debitPaymentList.map((paymentDetails, index) => (
                     <StyledTableRow >
@@ -252,8 +295,18 @@ function Dashboard() {
                     </StyledTableRow>
                   ))}
                 </TableBody>
+}
               </Table>
             </TableContainer>
+            <div className='row' style={{margin:20, marginBottom:70, backgroundColor:'', float:'center', marginRight:0}}>
+<Stack spacing={0} style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
+  <Pagination count={Math.ceil(totalDebitCount / 5)} page={debitPage} onChange={debitPaginationHandle}  />
+</Stack>
+
+
+
+
+                            </div>
             </Typography>
             </AccordionDetails>
         </Accordion>

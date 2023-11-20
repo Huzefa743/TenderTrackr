@@ -39,6 +39,7 @@ router.put('/update-customer/:custId',verifyUser,  customerController.updateCust
 router.get('/customer/:custId',verifyUser,  customerController.getCustomerById)
 router.get('/customer/:page/:limit',verifyUser,  customerController.getAllCustomer)
 router.delete('/customer/:custId',verifyUser,  customerController.deleteCustomer)
+router.get('/customer-list',verifyUser,  customerController.getAllCustomerList)
 
 //site routes
 router.post('/create-site/:custId',verifyUser,  siteController.createSite)

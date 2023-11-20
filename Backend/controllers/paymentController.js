@@ -162,136 +162,108 @@ const updateCustomer = async (req, res, next)=> {
     }
 //fetach all the debit payments-----------------
 const getAllPayment = async (req, res, next) => {
-    console.log("get overall payment ........")
-    
-    try{
-    
-    const paymentList =await Payment.find()
-   
-    let totalCreditPayment=0
-    let totalDebitPayment=0
-
-   
-
-    if(!paymentList){
-        res.status(400).json({
-            status: "failed",
-            message : `Payment with ref id not exist!!`,
-            data: paymentList,
-            length: paymentList.length,
-            totalCreditPayment:totalCreditPayment.toFixed(2),
-            totalDebitPayment:totalDebitPayment.toFixed(2),
-            totalBalancePayment:(totalCreditPayment.toFixed(2)-totalDebitPayment.toFixed(2)).toFixed(2)
-        }) 
+    console.log("get overall payment ........");
+  
+    try {
+      const paymentList = await Payment.find();
+  
+      if (!paymentList.length) {
+        return res.status(400).json({
+          status: "failed",
+          message: "No payments found!",
+          data: [],
+          length: 0,
+          totalCreditPayment: 0,
+          totalDebitPayment: 0,
+          totalBalancePayment: 0,
+        });
       }
-      else{
-
-        for(let i=0; i<paymentList.length; i++){
-            if(paymentList[i].action=="Credit"){
-                 totalCreditPayment=totalCreditPayment+ paymentList[i].amount
-            }
-            else if(paymentList[i].action=="Debit"){
-                totalDebitPayment=totalDebitPayment+ paymentList[i].amount
-           }
+  
+      let totalCreditPayment = 0;
+      let totalDebitPayment = 0;
+  
+      paymentList.forEach((payment) => {
+        if (payment.action === "Credit") {
+          totalCreditPayment += payment.amount;
+        } else if (payment.action === "Debit") {
+          totalDebitPayment += payment.amount;
         }
-    
-    res.status(200).json({ 
+      });
+  
+      const totalBalancePayment = totalCreditPayment - totalDebitPayment;
+  
+      res.status(200).json({
         status: "Success",
         message: "Successfully fetch the payment details",
         data: paymentList,
         length: paymentList.length,
-        totalCreditPayment:totalCreditPayment.toFixed(2),
-        totalDebitPayment:totalDebitPayment.toFixed(2),
-        totalBalancePayment:(totalCreditPayment.toFixed(2)-totalDebitPayment.toFixed(2)).toFixed(2)
-        })
+        totalCreditPayment: totalCreditPayment.toFixed(2),
+        totalDebitPayment: totalDebitPayment.toFixed(2),
+        totalBalancePayment: totalBalancePayment.toFixed(2),
+      });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({
+        status: "Failed",
+        message: "An error occurred",
+        error: error,
+      });
     }
-}
-   catch(error){
-       console.log(error);
-       res.status(500).json({
-           status: "Failed",
-           message: "an error occured",
-           error:error
-       });
-   }
   };
+  
 
 //fetach all the debit payments-----------------
 const getAllDebitPayment = async (req, res, next) => {
-    console.log("get overall payment ........")
-    
-    try{
-    
-    const paymentList =await Payment.find({"action":"Debit"})
+    console.log("get overall debit payment ........");
   
-    let totalCreditPayment=0
-    let totalDebitPayment=0
-
-   
-
-    if(!paymentList){
-        res.status(400).json({
-            status: "failed",
-            message : `Payment with ref id (${customerId}) not exist!!`,
-            data: paymentList,
-            length: paymentList.length,
-            totalCreditPayment:totalCreditPayment.toFixed(2),
-            totalDebitPayment:totalDebitPayment.toFixed(2),
-            totalBalancePayment:(totalCreditPayment.toFixed(2)-totalDebitPayment.toFixed(2)).toFixed(2)
-        }) 
+    try {
+      const page = req.query.page || 1;
+      const limit = req.query.limit || 5;
+  
+      const [paymentList, totalEntries] = await Promise.all([
+        Payment.find({ "action": "Debit" })
+          .skip((page - 1) * limit)
+          .limit(Number(limit))
+          .lean(),
+        Payment.countDocuments({ "action": "Debit" }),
+      ]);
+  
+      if (!paymentList) {
+        return res.status(400).json({
+          status: "failed",
+          message: `Payment with ref id not exist!!`,
+          data: paymentList,
+          length: paymentList.length,
+          totalCreditPayment: 0,
+          totalDebitPayment: 0,
+          totalBalancePayment: 0,
+          totalEntries: 0,
+        });
       }
-      else{
-
-        for(let i=0; i<paymentList.length; i++){
-            let customerDetails = await Customer.findOne({cust_id:paymentList[i].cust_id})
-            console.log("here is the payment details", paymentList[i])
-            paymentList[i].customer_name=customerDetails.name
-            let siteDetails = await Site.findOne({site_id:paymentList[i].site_id})
-            paymentList[i].site_name=siteDetails.name
-            if(paymentList[i].material_id){
-                let materialDetails = await Material.findOne({material_id:paymentList[i].material_id})
-                let workId=materialDetails.work_id
-                let workDetails = await Work.findOne({work_id:workId})
-                paymentList[i].work_type=workDetails.work_type
-            }
-            else if(paymentList[i].labour_id){
-                let labourDetails = await Labour.findOne({labour_id:paymentList[i].labour_id})
-                let workId=labourDetails.work_id
-                let workDetails = await Work.findOne({work_id:workId})
-                paymentList[i].work_type=workDetails.work_type
-            }
-            
-        }
-
-        for(let i=0; i<paymentList.length; i++){
-            if(paymentList[i].action=="Credit"){
-                 totalCreditPayment=totalCreditPayment+ paymentList[i].amount
-            }
-            else if(paymentList[i].action=="Debit"){
-                totalDebitPayment=totalDebitPayment+ paymentList[i].amount
-           }
-        }
-    
-    res.status(200).json({ 
+  
+      const totalDebitPayment = paymentList.reduce((total, payment) => {
+        return total + (payment.action === "Debit" ? payment.amount : 0);
+      }, 0);
+  
+  
+      res.status(200).json({
         status: "Success",
         message: "Successfully fetch the payment details",
         data: paymentList,
         length: paymentList.length,
-        totalCreditPayment:totalCreditPayment.toFixed(2),
-        totalDebitPayment:totalDebitPayment.toFixed(2),
-        totalBalancePayment:(totalCreditPayment.toFixed(2)-totalDebitPayment.toFixed(2)).toFixed(2)
-        })
+        totalDebitPayment: totalDebitPayment.toFixed(2),
+        totalEntries: totalEntries,
+      });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({
+        status: "Failed",
+        message: "An error occurred",
+        error: error,
+      });
     }
-}
-   catch(error){
-       console.log(error);
-       res.status(500).json({
-           status: "Failed",
-           message: "an error occured",
-           error:error
-       });
-   }
   };
+  
 
 //download credit payment excel payments-----------------
 const downloadDebitPaymentExcel = async (req, res, next) => {
@@ -356,76 +328,57 @@ const downloadDebitPaymentExcel = async (req, res, next) => {
 
 //fetach all the debit payments-----------------
 const getAllCreditPayment = async (req, res, next) => {
-    console.log("get overall credit payment ........")
-    
-    try{
-    
-    const paymentList =await Payment.find({"action":"Credit"}).lean()
+    console.log("get overall credit payment ........");
   
-    let totalCreditPayment=0
-    let totalDebitPayment=0
-
-   
-
-    if(!paymentList){
-        res.status(400).json({
-            status: "failed",
-            message : `Payment with ref id not exist!!`,
-            data: paymentList,
-            length: paymentList.length,
-            totalCreditPayment:totalCreditPayment.toFixed(2),
-            totalDebitPayment:totalDebitPayment.toFixed(2),
-            totalBalancePayment:(totalCreditPayment.toFixed(2)-totalDebitPayment.toFixed(2)).toFixed(2)
-        }) 
+    try {
+      const page = req.query.page || 1;
+      const limit = req.query.limit || 5;
+  
+      const [paymentList, totalEntries] = await Promise.all([
+        Payment.find({ "action": "Credit" })
+          .skip((page - 1) * limit)
+          .limit(Number(limit))
+          .lean(),
+        Payment.countDocuments({ "action": "Credit" }),
+      ]);
+  
+      if (!paymentList) {
+        return res.status(400).json({
+          status: "failed",
+          message: `Payment with ref id not exist!!`,
+          data: paymentList,
+          length: paymentList.length,
+          totalCreditPayment: 0,
+          totalDebitPayment: 0,
+          totalBalancePayment: 0,
+          totalEntries: 0,
+        });
       }
-      else{
-        for(let i=0; i<paymentList.length; i++){
-            console.log("here si the payment details", paymentList[i])
-            
-            let customerDetails = await Customer.findOne({"cust_id":paymentList[i].cust_id})
-            console.log("here si the details", customerDetails)
-            
-                paymentList[i].customer_name=customerDetails.name
-            
-           
-        }    
-
-        for(let i=0; i<paymentList.length; i++){
-            if(paymentList[i].action=="Credit"){
-                 totalCreditPayment=totalCreditPayment+ paymentList[i].amount
-            }
-            else if(paymentList[i].action=="Debit"){
-                totalDebitPayment=totalDebitPayment+ paymentList[i].amount
-           }
-        }
-        
-         
-        
-        
-      //  let output =await generateExcelFile(await getAttributesByKeys(paymentList, ['date', 'customer_name', 'mop', 'remark', 'amount']))
-        
-    
-
-    res.status(200).json({ 
+  
+      const totalCreditPayment = paymentList.reduce((total, payment) => {
+        return total + (payment.action === "Credit" ? payment.amount : 0);
+      }, 0);
+  
+  
+      res.status(200).json({
         status: "Success",
         message: "Successfully fetch the payment details",
         data: paymentList,
         length: paymentList.length,
-        totalCreditPayment:totalCreditPayment.toFixed(2),
-        totalDebitPayment:totalDebitPayment.toFixed(2),
-        totalBalancePayment:(totalCreditPayment.toFixed(2)-totalDebitPayment.toFixed(2)).toFixed(2)
-        })
+        totalCreditPayment: totalCreditPayment.toFixed(2),
+        totalEntries: totalEntries,
+      });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({
+        status: "Failed",
+        message: "An error occurred",
+        error: error,
+      });
     }
-}
-   catch(error){
-       console.log(error);
-       res.status(500).json({
-           status: "Failed",
-           message: "an error occured",
-           error:error
-       });
-   }
   };
+  
+  
 
 //download credit payment excel payments-----------------
 const downloadCreditPaymentExcel = async (req, res, next) => {

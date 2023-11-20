@@ -1,4 +1,4 @@
-import { Accordion, AccordionDetails, AccordionSummary, AppBar, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton, List, ListItem, ListItemAvatar, ListItemText, MenuItem, Slide, Table, TableBody, TableContainer, TableHead, TableRow, TextField, Toolbar, Typography } from '@mui/material';
+import { Accordion, AccordionDetails, AccordionSummary, AppBar, Button, CircularProgress, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton, List, ListItem, ListItemAvatar, ListItemText, MenuItem, Slide, Table, TableBody, TableContainer, TableHead, TableRow, TextField, Toolbar, Typography } from '@mui/material';
 import React , {useState, useEffect}from 'react'
 import { Container, Card, ListGroup } from 'react-bootstrap'
 import { useNavigate, useParams } from 'react-router-dom';
@@ -101,31 +101,40 @@ function Dashboard() {
             setCustomerDetials(res.data.data);
         });
     }
+    const[paymentDetailsLoader, setPaymentDetailsLoader] = useState(false)
 
     async function fetchPaymentDetails(){
+      setPaymentDetailsLoader(true)
         API.getPaymentListByCustId(customerId).then((res) => {
             setPaymentList(res.data.data);
             setCustomerTotalCreditPayment(res.data.totalCreditPayment)
             setCustomerTotalDebitPayment(res.data.totalDebitPayment)
             setCustomerTotalBalancePayment(res.data.totalBalancePayment)
+            setPaymentDetailsLoader(false)
         });
     }
-
+    const[siteDetailsLoader, setSiteDetailsLoader] = useState(false)
     async function fetchSiteList(){
+         setSiteDetailsLoader(true)
         API.getSiteList(customerId).then((res) => {
             setSiteList(res.data.data);
+            setSiteDetailsLoader(false)
         });
     }
-
+    const[labourDetailsLoader, setLabourDetailsLoader] = useState(false)
     async function fetchLabourList(workId){
+      setLabourDetailsLoader(true)
         API.getLabourList(workId).then((res) => {
             setLabourList(res.data.data);
+            setLabourDetailsLoader(false)
         });
     }
-
+    const[materialDetailsLoader, setMaterialDetailsLoader] = useState(false)
     async function fetchMaterialList(workId){
+      setMaterialDetailsLoader(true)
         API.getMaterialList(workId).then((res) => {
             setMaterialList(res.data.data);
+            setMaterialDetailsLoader(false)
         });
     }
 
@@ -366,9 +375,9 @@ async function fetchMaterialDetailsByMaterialId(materialId){
                             <AccordionDetails style={{padding:0}}>
                             <Typography >
                                 <div className='row' style={{padding:0, margin:0, marginTop:10}}>
-                                    <p className='history-heading'>Total Credit Payment: {customerTotalCreditPayment}</p>
-                                    <p className='history-heading'>Total Debit Payment: {customerTotalDebitPayment}</p>
-                                    <p className='history-heading'>Total Balance Payment: {customerTotalBalancePayment}</p>
+                                    <p className='history-heading'>Total Credit Payment: { paymentDetailsLoader?<CircularProgress size={15} style={{color:'lightgray'}}/> :customerTotalCreditPayment}</p>
+                                    <p className='history-heading'>Total Debit Payment: {paymentDetailsLoader?<CircularProgress size={15} style={{color:'lightgray'}}/> : customerTotalDebitPayment}</p>
+                                    <p className='history-heading'>Total Balance Payment: {paymentDetailsLoader?<CircularProgress size={15} style={{color:'lightgray'}}/> : customerTotalBalancePayment}</p>
                                 </div>
                             <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -382,6 +391,11 @@ async function fetchMaterialDetailsByMaterialId(materialId){
             <StyledTableCell >Delete</StyledTableCell>
           </TableRow>
         </TableHead>
+        {paymentDetailsLoader?
+        <div style={{  display: 'flex', justifyContent: 'center', alignItems: 'center', height:'100px', width:'100%', marginLeft:'50%' }}>
+        <CircularProgress size={25} style={{color:'#FF8C00'}}/>
+        </div>
+        :
         <TableBody>
           {paymentList.map((paymentDetails) => (
             <StyledTableRow >
@@ -406,6 +420,7 @@ async function fetchMaterialDetailsByMaterialId(materialId){
             </StyledTableRow>
           ))}
         </TableBody>
+}
       </Table>
     </TableContainer>
                           
@@ -425,6 +440,11 @@ async function fetchMaterialDetailsByMaterialId(materialId){
                             <Typography style={{color:'black', fontWeight:600}}><span className='history-heading'>Sites Details</span></Typography>
                             </AccordionSummary>
                             <AccordionDetails>
+                              {siteDetailsLoader?
+        <div style={{  display: 'flex', justifyContent: 'center', alignItems: 'center', height:'100px', width:'100%', marginLeft:'50%' }}>
+        <CircularProgress size={25} style={{color:'#FF8C00'}}/>
+        </div>
+        :
                             <Typography>
                                 {siteList.map((siteDetails, index)=>(
                                     <Accordion expanded={expanded === 'panel'+index+1} onChange={handleChange('panel'+index+1)}>
@@ -468,7 +488,7 @@ async function fetchMaterialDetailsByMaterialId(materialId){
                                 ))}
                                     
                             </Typography>
-                           
+}
                             </AccordionDetails>
    </Accordion>
 
@@ -504,6 +524,14 @@ async function fetchMaterialDetailsByMaterialId(materialId){
           <div style={{ marginLeft: 10,margin:10, paddingTop: 40 }}>
               {/* ------------labour details */}
                 <p style={{ fontWeight: 700, color: '', margin: 10, marginLeft:5, marginTop:20 }}>Labour Details :</p>
+                {labourDetailsLoader?
+        <div style={{  display: 'flex', justifyContent: 'center', alignItems: 'center', height:'100px', width:'100%', marginLeft:'50%' }}>
+        <CircularProgress size={25} style={{color:'#FF8C00'}}/>
+        </div>
+        :
+                
+             <> 
+                
                 {labourList.map((labourDetails, index)=>(
                                     <Accordion >
                                     <AccordionSummary 
@@ -540,10 +568,19 @@ async function fetchMaterialDetailsByMaterialId(materialId){
                                     </AccordionDetails>
                                 </Accordion>
                                 ))}
+                                </>}
 
          {/* --------material details */}
          <p style={{ fontWeight: 700, color: '', margin: 10, marginLeft:5 , marginTop:20}}>Material Details :</p>
-                {materialList.map((materialDetails, index)=>(
+                
+                {materialDetailsLoader?
+        <div style={{  display: 'flex', justifyContent: 'center', alignItems: 'center', height:'100px', width:'100%', marginLeft:'50%' }}>
+        <CircularProgress size={25} style={{color:'#FF8C00'}}/>
+        </div>
+        :
+                
+             <> 
+              {materialList.map((materialDetails, index)=>(
                                     <Accordion >
                                     <AccordionSummary 
                                     expandIcon={<ExpandMoreIcon />}
@@ -595,6 +632,7 @@ async function fetchMaterialDetailsByMaterialId(materialId){
                                     </AccordionDetails>
                                 </Accordion>
                                 ))}
+                                     </>  }
           </div>
          
 

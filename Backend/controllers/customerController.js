@@ -176,6 +176,33 @@ const getAllCustomer = async (req, res, next) => {
    }
   };
 
+  const getAllCustomerList = async (req, res, next) => {
+    console.log("get list of all user ........");
+    try {
+      const { page = 1, limit = 10 } = req.query;
+      const skip = (page - 1) * limit;
+  
+      const customerList = await Customer.find().skip(skip).limit(Number(limit));
+      const totalInDb = await Customer.countDocuments();
+  
+      res.status(200).json({
+        status: "Success",
+        message: "Successfully fetch the list of customers",
+        totalInDb: totalInDb,
+        total: customerList.length,
+        data: customerList,
+      });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({
+        status: "Failed",
+        message: "An error occurred",
+        error: error,
+      });
+    }
+  };
+  
+
       //  Delete customer by customer Id
       const deleteCustomer =async (req, res, next)=>{
         console.log("delete customer is running.....")
@@ -212,5 +239,5 @@ const getAllCustomer = async (req, res, next) => {
 
 
     module.exports={
-        createCustomer, getCustomerById, updateCustomer, getAllCustomer, deleteCustomer
+        createCustomer, getCustomerById, updateCustomer, getAllCustomer, deleteCustomer, getAllCustomerList
     }

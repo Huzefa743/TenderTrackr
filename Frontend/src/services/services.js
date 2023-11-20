@@ -33,6 +33,18 @@ export const getAllCustomer = async (page, limit) =>{
     });
     }
 
+//Get all customers - GET
+export const getAllCustomerList = async (page) =>{
+  return await axios({
+    method: "GET",
+    url: baseURL + `customer-list?page=${page}&limit=10`,
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Basic ${localStorage.getItem("accesstoken")}`,
+    },
+  });
+  }
+
 //Get  customers detauks- GET
 export const getCustomerDetails= async (customerId) =>{
   return await axios({
@@ -158,10 +170,10 @@ export const getMaterialList= async (workId) =>{
         });
         }
          //Get all payment  list - GET
-      export const getAllCreditPaymentDetails= async () =>{
+      export const getAllCreditPaymentDetails= async (page) =>{
         return await axios({
           method: "GET",
-          url: baseURL + `payment-list-credit`,
+          url: baseURL + `payment-list-credit?page=${page}&limit=5`,
           headers: {
             "Content-Type": "application/json",
             Authorization: `Basic ${localStorage.getItem("accesstoken")}`,
@@ -169,10 +181,10 @@ export const getMaterialList= async (workId) =>{
         });
         }
          //Get all payment  list - GET
-      export const getAllDebitPaymentDetails= async () =>{
+      export const getAllDebitPaymentDetails= async (page) =>{
         return await axios({
           method: "GET",
-          url: baseURL + `payment-list-debit`,
+          url: baseURL + `payment-list-debit?page=${page}&limit=5`,
           headers: {
             "Content-Type": "application/json",
             Authorization: `Basic ${localStorage.getItem("accesstoken")}`,

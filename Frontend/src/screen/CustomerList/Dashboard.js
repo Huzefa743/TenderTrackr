@@ -110,8 +110,8 @@ function Dashboard() {
   
     async function fetchAllCustomer(page){
       setLoaderVisilbe(true)
-        API.getAllCustomer(page, 100).then((res) => {
-          console.log("List of customre", res.data)
+        API.getAllCustomerList(page).then((res) => {
+          console.log("List of customre", res)
             setCustomerList(res.data.data);
             setCustomerCount(res?.data?.totalInDb)
              setLoaderVisilbe(false)
