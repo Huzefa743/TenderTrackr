@@ -240,8 +240,19 @@ const getAllDebitPayment = async (req, res, next) => {
           totalEntries: 0,
         });
       }
+
+       // Fetch customer_name for each payment
+    const paymentListWithCustomerNames = await Promise.all(
+      paymentList.map(async (payment) => {
+        const customer = await Customer.findOne({ cust_id: payment.cust_id });
+        return {
+          ...payment,
+          customer_name: customer ? customer.name : null,
+        };
+      })
+    );
   
-      const totalDebitPayment = paymentList.reduce((total, payment) => {
+      const totalDebitPayment = paymentListWithCustomerNames.reduce((total, payment) => {
         return total + (payment.action === "Debit" ? payment.amount : 0);
       }, 0);
   
@@ -249,8 +260,8 @@ const getAllDebitPayment = async (req, res, next) => {
       res.status(200).json({
         status: "Success",
         message: "Successfully fetch the payment details",
-        data: paymentList,
-        length: paymentList.length,
+        data: paymentListWithCustomerNames,
+        length: paymentListWithCustomerNames.length,
         totalDebitPayment: totalDebitPayment.toFixed(2),
         totalEntries: totalEntries,
       });
@@ -328,55 +339,69 @@ const downloadDebitPaymentExcel = async (req, res, next) => {
 
 //fetach all the debit payments-----------------
 const getAllCreditPayment = async (req, res, next) => {
-    console.log("get overall credit payment ........");
-  
-    try {
-      const page = req.query.page || 1;
-      const limit = req.query.limit || 5;
-  
-      const [paymentList, totalEntries] = await Promise.all([
-        Payment.find({ "action": "Credit" })
-          .skip((page - 1) * limit)
-          .limit(Number(limit))
-          .lean(),
-        Payment.countDocuments({ "action": "Credit" }),
-      ]);
-  
-      if (!paymentList) {
-        return res.status(400).json({
-          status: "failed",
-          message: `Payment with ref id not exist!!`,
-          data: paymentList,
-          length: paymentList.length,
-          totalCreditPayment: 0,
-          totalDebitPayment: 0,
-          totalBalancePayment: 0,
-          totalEntries: 0,
-        });
-      }
-  
-      const totalCreditPayment = paymentList.reduce((total, payment) => {
-        return total + (payment.action === "Credit" ? payment.amount : 0);
-      }, 0);
-  
-  
-      res.status(200).json({
-        status: "Success",
-        message: "Successfully fetch the payment details",
+  console.log("get overall credit payment ........");
+
+  try {
+    const page = req.query.page || 1;
+    const limit = req.query.limit || 5;
+
+    const [paymentList, totalEntries] = await Promise.all([
+      Payment.find({ "action": "Credit" })
+        .skip((page - 1) * limit)
+        .limit(Number(limit))
+        .lean(),
+      Payment.countDocuments({ "action": "Credit" }),
+    ]);
+
+    if (!paymentList) {
+      return res.status(400).json({
+        status: "failed",
+        message: `Payment with ref id not exist!!`,
         data: paymentList,
         length: paymentList.length,
-        totalCreditPayment: totalCreditPayment.toFixed(2),
-        totalEntries: totalEntries,
-      });
-    } catch (error) {
-      console.log(error);
-      res.status(500).json({
-        status: "Failed",
-        message: "An error occurred",
-        error: error,
+        totalCreditPayment: 0,
+        totalDebitPayment: 0,
+        totalBalancePayment: 0,
+        totalEntries: 0,
       });
     }
-  };
+
+    // Fetch customer_name for each payment
+    const paymentListWithCustomerNames = await Promise.all(
+      paymentList.map(async (payment) => {
+        const customer = await Customer.findOne({ cust_id: payment.cust_id });
+        return {
+          ...payment,
+          customer_name: customer ? customer.name : null,
+        };
+      })
+    );
+
+    const totalCreditPayment = paymentListWithCustomerNames.reduce(
+      (total, payment) => {
+        return total + (payment.action === "Credit" ? payment.amount : 0);
+      },
+      0
+    );
+
+    res.status(200).json({
+      status: "Success",
+      message: "Successfully fetch the payment details",
+      data: paymentListWithCustomerNames,
+      length: paymentListWithCustomerNames.length,
+      totalCreditPayment: totalCreditPayment.toFixed(2),
+      totalEntries: totalEntries,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      status: "Failed",
+      message: "An error occurred",
+      error: error,
+    });
+  }
+};
+
   
   
 

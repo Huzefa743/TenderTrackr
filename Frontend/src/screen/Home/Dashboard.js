@@ -38,6 +38,7 @@ function Dashboard() {
     async function fetchCustomerDetails(){
       setPaymentDetailsLoader(true)
         API.getAllPaymentDetails().then((res) => {
+          
           setCustomerTotalCreditPayment(res.data.totalCreditPayment)
           setCustomerTotalDebitPayment(res.data.totalDebitPayment)
           setCustomerTotalBalancePayment(res.data.totalBalancePayment)
@@ -58,6 +59,7 @@ function Dashboard() {
     async function fetchAllCreditPayment(page){
       setCreditPaymentLoader(true)
       API.getAllCreditPaymentDetails(page).then((res) => {
+        console.log("here is the credit payment details", res)
         setCreditPaymentList(res.data.data)
         setTotalCredit(res.data.totalCreditPayment)
         setTotalCreditCount(res?.data?.totalEntries)
