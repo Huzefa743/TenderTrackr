@@ -1,9 +1,9 @@
 import axios from "axios";
 
-//const baseURL = "https://tendertrackr.up.railway.app/api/v1/"
+//const baseURL = "https://tendertrackr.vercel.app/api/v1/"
 const base = "http://mimicker.thbscoetg.com"
-//const baseURL = "https://tendertrackr.up.railway.app/api/v1/"
-const baseURL = "https://tendertrackr.up.railway.app/api/v1/"
+//const baseURL = "https://tendertrackr.vercel.app/api/v1/"
+const baseURL = "https://tendertrackr.vercel.app/api/v1/"
 
 
 // Login User - POST

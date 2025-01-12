@@ -1,0 +1,21 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "app2.js",
+        "use": "@vercel/node"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "app2.js"
+      }
+    ],
+    "env": {
+      "MONGO_URI": "mongodb+srv://huzefakhan284:QrtI0pEzSOERguRR@cluster0.qcoxkyk.mongodb.net/",
+      "NODE_ENV": "production",
+      "PORT":8080
+    }
+  }
+  
