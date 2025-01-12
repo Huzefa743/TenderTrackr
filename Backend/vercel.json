@@ -14,8 +14,7 @@
     ],
     "env": {
       "MONGO_URI": "mongodb+srv://huzefakhan284:QrtI0pEzSOERguRR@cluster0.qcoxkyk.mongodb.net/",
-      "NODE_ENV": "production",
-      "PORT":8080
+      "NODE_ENV": "production"
     }
   }
   
